@@ -3,16 +3,16 @@ package com.github.sergey_kornyushin.data.database.relations
 import androidx.room.Embedded
 import androidx.room.Junction
 import androidx.room.Relation
-import com.github.sergey_kornyushin.data.database.entities.Film
-import com.github.sergey_kornyushin.data.database.entities.Genre
+import com.github.sergey_kornyushin.data.database.entities.FilmEntity
+import com.github.sergey_kornyushin.data.database.entities.GenreEntity
 
 
 data class GenreWithFilms(
-    @Embedded val genre: Genre,
+    @Embedded val genreEntity: GenreEntity,
     @Relation(
         parentColumn = "genreName",
         entityColumn = "filmId",
         associateBy = Junction(FilmsGenresCrossRef::class)
     )
-    val films: List<Film>
+    val filmEntities: List<FilmEntity>
 )

@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Genre(
+data class GenreEntity(
     @PrimaryKey(autoGenerate = false)
     val genreName: String
 )

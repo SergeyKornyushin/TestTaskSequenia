@@ -1,11 +1,6 @@
-package com.github.sergey_kornyushin.data.database.entities
+package com.github.sergey_kornyushin.domain.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity
 data class Film(
-    @PrimaryKey(autoGenerate = false)
     val filmId: Int,
     val image_url: String,
     val localized_name: String,
