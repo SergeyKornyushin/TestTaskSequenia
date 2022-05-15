@@ -1,8 +1,8 @@
-package com.github.SergeyKornyushin.presentation.ui
+package com.github.sergey_kornyushin.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.github.SergeyKornyushin.R
+import com.github.sergey_kornyushin.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.github.SergeyKornyushin
+package com.github.sergey_kornyushin
 
 import org.junit.Test
 
