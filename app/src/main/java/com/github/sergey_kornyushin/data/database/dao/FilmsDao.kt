@@ -1,8 +1,8 @@
 package com.github.sergey_kornyushin.data.database.dao
 
 import androidx.room.*
-import com.github.sergey_kornyushin.data.database.entities.FilmEntity
-import com.github.sergey_kornyushin.data.database.entities.GenreEntity
+import com.github.sergey_kornyushin.data.database.model.FilmEntity
+import com.github.sergey_kornyushin.data.database.model.GenreEntity
 import com.github.sergey_kornyushin.data.database.relations.FilmWithGenres
 import com.github.sergey_kornyushin.data.database.relations.FilmsGenresCrossRef
 import com.github.sergey_kornyushin.data.database.relations.GenreWithFilms

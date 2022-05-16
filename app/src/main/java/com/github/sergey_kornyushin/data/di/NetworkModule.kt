@@ -1,4 +1,4 @@
-package com.github.sergey_kornyushin.di
+package com.github.sergey_kornyushin.data.di
 
 import com.github.sergey_kornyushin.data.remote.FilmsApi
 import com.github.sergey_kornyushin.data.repository.ApiRepository
@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object NetworkModule {
 
     private const val BASE_URL = "https://s3-eu-west-1.amazonaws.com/"
 

@@ -1,9 +1,10 @@
 package com.github.sergey_kornyushin.data.database.mappers
 
-import com.github.sergey_kornyushin.data.database.entities.GenreEntity
+import com.github.sergey_kornyushin.data.database.model.GenreEntity
 import com.github.sergey_kornyushin.data.remote.dto.FilmsDto
+import javax.inject.Inject
 
-class GenresMapper : ResponseMapper<FilmsDto, List<GenreEntity>> {
+class GenresToDbMapper @Inject constructor() : ResponseMapper<FilmsDto, List<GenreEntity>> {
     override fun map(films: FilmsDto): List<GenreEntity> {
         val hashSet = HashSet<String>()
         films.filmsDto.forEach { film ->

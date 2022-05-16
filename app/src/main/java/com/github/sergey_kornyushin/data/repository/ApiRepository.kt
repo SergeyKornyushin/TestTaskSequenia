@@ -13,7 +13,7 @@ interface ApiRepository {
 
     fun getFilms(): Flow<Resource<List<FilmDto>>>
 
-    class Base @Inject constructor(
+    class Base constructor(
         private val api: FilmsApi
     ) : ApiRepository {
 

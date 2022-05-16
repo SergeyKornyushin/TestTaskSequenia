@@ -1,4 +1,4 @@
-package com.github.sergey_kornyushin.data.database.entities
+package com.github.sergey_kornyushin.data.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

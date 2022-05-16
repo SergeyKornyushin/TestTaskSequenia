@@ -6,8 +6,8 @@ import com.github.sergey_kornyushin.domain.model.Film
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetFilmsUseCase @Inject constructor(
-    private val repository: ApiRepository
-) {
 
+//create interface here and his realization in data layer
+interface GetFilmsUseCase {
+    fun getFilms()
 }

@@ -1,9 +1,10 @@
 package com.github.sergey_kornyushin.data.database.mappers
 
-import com.github.sergey_kornyushin.data.database.entities.FilmEntity
+import com.github.sergey_kornyushin.data.database.model.FilmEntity
 import com.github.sergey_kornyushin.data.remote.dto.FilmsDto
+import javax.inject.Inject
 
-class FilmsMapper : ResponseMapper<FilmsDto, List<FilmEntity>> {
+class FilmsToDbMapper @Inject constructor() : ResponseMapper<FilmsDto, List<FilmEntity>> {
     override fun map(films: FilmsDto) =
         films.filmsDto.map { film ->
             FilmEntity(
