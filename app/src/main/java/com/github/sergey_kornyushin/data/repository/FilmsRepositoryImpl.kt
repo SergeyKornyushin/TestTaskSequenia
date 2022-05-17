@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
+import java.lang.NullPointerException
 import javax.inject.Inject
 
 class FilmsRepositoryImpl @Inject constructor(
@@ -43,13 +44,18 @@ class FilmsRepositoryImpl @Inject constructor(
 
     override fun sortFilmsByGenre(genre: Genre): Flow<Resource<List<RecyclerViewItem>>> = flow {
         emit(Resource.Loading())
-        emit(
-            Resource.Success(
-                listFiller.createListForRecyclerView(
-                    filmsDao.getAllGenres(),
-                    filmsDao.getGenreWithFilms(genre.genreName).filmEntities
+        try {
+            emit(
+                Resource.Success(
+                    listFiller.createListForRecyclerView(
+                        filmsDao.getAllGenres(),
+                        filmsDao.getGenreWithFilms(genre.genreName).filmEntities
+                    )
                 )
             )
-        )
+        } catch (e: NullPointerException) {
+            emit(Resource.Error("Unexpected error"))
+        }
+
     }
 }

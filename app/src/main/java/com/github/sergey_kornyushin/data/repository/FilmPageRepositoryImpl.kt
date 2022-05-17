@@ -7,6 +7,7 @@ import com.github.sergey_kornyushin.domain.model.Film
 import com.github.sergey_kornyushin.domain.repository.SelectedFilmRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import java.lang.NullPointerException
 import javax.inject.Inject
 
 class FilmPageRepositoryImpl @Inject constructor(
@@ -16,6 +17,10 @@ class FilmPageRepositoryImpl @Inject constructor(
 
     override fun getSelectedFilm(film: Film): Flow<Resource<Film>> = flow {
         emit(Resource.Loading())
-        emit(Resource.Success(singleFilmMapper.mapFilmToDomain(filmsDao.getFilmById(film.filmId))))
+        try {
+            emit(Resource.Success(singleFilmMapper.mapFilmToDomain(filmsDao.getFilmById(film.filmId))))
+        } catch (e: NullPointerException){
+            emit(Resource.Error("Unexpected error"))
+        }
     }
 }
