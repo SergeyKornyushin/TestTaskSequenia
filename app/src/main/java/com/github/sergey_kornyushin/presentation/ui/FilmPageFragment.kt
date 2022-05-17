@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.sergey_kornyushin.R
-import com.github.sergey_kornyushin.databinding.FragmentFilmsListBinding
+import com.github.sergey_kornyushin.databinding.FragmentFilmPageBinding
 
-class FilmsListFragment : Fragment() {
-    private lateinit var binding: FragmentFilmsListBinding
+class FilmPageFragment : Fragment() {
+    private lateinit var binding: FragmentFilmPageBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFilmsListBinding.inflate(inflater, container, false)
+        binding = FragmentFilmPageBinding.inflate(inflater, container, false)
         return binding.root
     }
 }
