@@ -3,6 +3,7 @@ package com.github.sergey_kornyushin.presentation.ui
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.domain.model.Film
@@ -16,6 +17,22 @@ import com.github.sergey_kornyushin.domain.use_cases.sort_films.SortFilmsByGenre
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
+
+object FragmentManager {
+    var currentFrag: Fragment? = null
+
+    fun setFragment(newFrag: Fragment, activity: AppCompatActivity) {
+//        val transaction = activity.supportFragmentManager.beginTransaction()
+//        transaction.replace(R.id.fragment_holder, newFrag)
+//        transaction.commit()
+
+        activity.supportFragmentManager.beginTransaction()
+            .replace(R.id.fragments_container, newFrag)
+            .commit()
+
+        currentFrag = newFrag
+    }
+}
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -33,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        FragmentManager.setFragment(FilmPageFragment(), this)
 
         val filmsUseCase = GetFilmsUseCase(repo)
 
