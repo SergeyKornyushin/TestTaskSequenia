@@ -24,10 +24,8 @@ object StorageModule {
             FilmsDataBase.DATABASE_NAME
         ).build()
 
-
     @Singleton
     @Provides
     fun provideFilmsDao(filmsDataBase: FilmsDataBase): FilmsDao =
         filmsDataBase.filmsDao()
-
 }

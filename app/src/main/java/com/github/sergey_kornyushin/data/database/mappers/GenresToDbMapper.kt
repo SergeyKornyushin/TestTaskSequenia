@@ -5,9 +5,9 @@ import com.github.sergey_kornyushin.data.remote.dto.FilmsDto
 import javax.inject.Inject
 
 class GenresToDbMapper @Inject constructor() : ResponseMapper<FilmsDto, List<GenreEntity>> {
-    override fun map(films: FilmsDto): List<GenreEntity> {
+    override fun map(filmsDto: FilmsDto): List<GenreEntity> {
         val hashSet = HashSet<String>()
-        films.filmsDto.forEach { film ->
+        filmsDto.filmsDto.forEach { film ->
             film.genres?.let { hashSet.addAll(it) }
         }
         val genresList: MutableList<GenreEntity> = mutableListOf()

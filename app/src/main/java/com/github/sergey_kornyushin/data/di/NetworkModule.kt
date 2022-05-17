@@ -1,7 +1,6 @@
 package com.github.sergey_kornyushin.data.di
 
 import com.github.sergey_kornyushin.data.remote.FilmsApi
-import com.github.sergey_kornyushin.data.repository.ApiRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,21 +13,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://s3-eu-west-1.amazonaws.com/"
+    private const val BASE_URL = "https://s3-eu-west-1.amazonaws.com"
 
-    @Provides
     @Singleton
-    fun provideFilmsApi(): FilmsApi{
+    @Provides
+    fun provideFilmsApi(): FilmsApi {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(FilmsApi::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun provideApiRepository(api: FilmsApi): ApiRepository{
-        return ApiRepository.Base(api)
     }
 }

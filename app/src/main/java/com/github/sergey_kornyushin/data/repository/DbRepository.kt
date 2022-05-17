@@ -14,27 +14,27 @@ interface DbRepository {
 
     class Base @Inject constructor(
         private val db: FilmsDataBase,
-        private val films: FilmsDto
+        private val filmsDto: FilmsDto
     ) : DbRepository {
 
         private val dao = db.filmsDao()
 
         override suspend fun insertFilm() {
-            val filmEntity = FilmsToDbMapper().map(films)
+            val filmEntity = FilmsToDbMapper().map(filmsDto)
             filmEntity.forEach { film ->
                 dao.insertFilm(film)
             }
         }
 
         override suspend fun insertGenre() {
-            val genreEntity = GenresToDbMapper().map(films)
+            val genreEntity = GenresToDbMapper().map(filmsDto)
             genreEntity.forEach { genre ->
                 dao.insertGenre(genre)
             }
         }
 
         override suspend fun insertFilmsGenresCrossRef() {
-            val filmsGenresCrossRef = FilmsGenresCrossRefMapper().map(films)
+            val filmsGenresCrossRef = FilmsGenresCrossRefMapper().map(filmsDto)
             filmsGenresCrossRef.forEach { crossRef ->
                 dao.insertFilmsGenreCrossRef(crossRef)
             }
