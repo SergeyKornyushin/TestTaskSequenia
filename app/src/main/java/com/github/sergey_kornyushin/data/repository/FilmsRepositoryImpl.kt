@@ -56,6 +56,5 @@ class FilmsRepositoryImpl @Inject constructor(
         } catch (e: NullPointerException) {
             emit(Resource.Error("Unexpected error"))
         }
-
     }
 }
