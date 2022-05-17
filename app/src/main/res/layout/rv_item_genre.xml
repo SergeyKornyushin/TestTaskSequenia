@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="3dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginEnd="3dp"
+    android:background="@drawable/layer_border_background">
+
+    <TextView
+        android:id="@+id/tv_rv_title"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:padding="6dp"
+        android:textSize="17sp"
+        android:textColor="@color/my_text"
+        android:textStyle="bold"
+        tools:text="title"/>
+</FrameLayout>

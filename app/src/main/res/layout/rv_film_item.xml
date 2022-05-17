@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp"
+    android:background="@color/my_gray">
+
+    <ImageView
+        android:id="@+id/img_poster"
+        android:layout_width="170dp"
+        android:layout_height="210dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_vertical|bottom"
+        android:alpha="0.6"
+        android:background="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_film_name"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textColor="@color/my_text"
+        android:textSize="16sp"
+        tools:text="Побег из Шоушенка фывффыa sdasdasdasda sdasdasda dsasdasdasdasdвфывфвыфывфв" />
+
+    <TextView
+        android:id="@+id/tv_not_found"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Изображение не найдено"
+        android:textAlignment="center"
+        android:textColor="@color/my_text"
+        android:textSize="18sp" />
+</androidx.cardview.widget.CardView>
