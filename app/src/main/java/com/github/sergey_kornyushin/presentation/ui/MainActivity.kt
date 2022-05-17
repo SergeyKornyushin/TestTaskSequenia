@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         val genre = Genre("триллер")
         val sortUseCase = SortFilmsByGenreUseCase(sortRepo)
 
-        val film = Film(filmId = 426364)
+        val film = Film(filmId = 435)
         val getSelectedUseCase = GetSelectedFilmUseCase(getSelectedRepo)
 
         lifecycleScope.launchWhenCreated {
