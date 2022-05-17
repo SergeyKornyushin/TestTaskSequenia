@@ -8,7 +8,7 @@ import com.github.sergey_kornyushin.data.repository.mappers.DomainListFiller
 import com.github.sergey_kornyushin.domain.model.Genre
 import com.github.sergey_kornyushin.domain.repository.FilmsRepository
 import com.github.sergey_kornyushin.domain.repository.SortRepository
-import com.github.sergey_kornyushin.presentation.main_list.recycler_view.RecyclerViewItem
+import com.github.sergey_kornyushin.presentation.main_list.recycler_view.RVFilmItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -23,7 +23,7 @@ class FilmsRepositoryImpl @Inject constructor(
     private val listFiller: DomainListFiller
 ) : FilmsRepository, SortRepository {
 
-    override fun getAndSaveFilms(): Flow<Resource<List<RecyclerViewItem>>> = flow {
+    override fun getAndSaveFilms(): Flow<Resource<List<RVFilmItem>>> = flow {
         emit(Resource.Loading())
         try {
             mappers.saveFilms(api.getFilms(), filmsDao)
@@ -42,7 +42,7 @@ class FilmsRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun sortFilmsByGenre(genre: Genre): Flow<Resource<List<RecyclerViewItem>>> = flow {
+    override fun sortFilmsByGenre(genre: Genre): Flow<Resource<List<RVFilmItem>>> = flow {
         emit(Resource.Loading())
         try {
             emit(

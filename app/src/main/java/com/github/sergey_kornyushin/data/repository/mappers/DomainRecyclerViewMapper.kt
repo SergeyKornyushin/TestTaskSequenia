@@ -2,18 +2,18 @@ package com.github.sergey_kornyushin.data.repository.mappers
 
 import com.github.sergey_kornyushin.data.database.model.FilmEntity
 import com.github.sergey_kornyushin.data.database.model.GenreEntity
-import com.github.sergey_kornyushin.presentation.main_list.recycler_view.RecyclerViewItem
+import com.github.sergey_kornyushin.presentation.main_list.recycler_view.RVFilmItem
 import javax.inject.Inject
 
 interface DomainRecyclerViewMapper {
 
-    fun mapFilmsToDomain(filmsFromDb: List<FilmEntity>): List<RecyclerViewItem>
-    fun mapGenresToDomain(genresFromDb: List<GenreEntity>): List<RecyclerViewItem>
+    fun mapFilmsToDomain(filmsFromDb: List<FilmEntity>): List<RVFilmItem>
+    fun mapGenresToDomain(genresFromDb: List<GenreEntity>): List<RVFilmItem>
 
     class Base @Inject constructor() : DomainRecyclerViewMapper {
-        override fun mapFilmsToDomain(filmsFromDb: List<FilmEntity>): List<RecyclerViewItem> =
+        override fun mapFilmsToDomain(filmsFromDb: List<FilmEntity>): List<RVFilmItem> =
             filmsFromDb.map { film ->
-                RecyclerViewItem.FilmItem(
+                RVFilmItem.FilmItem(
                     id = film.filmId,
                     image_url = film.image_url,
                     name = film.name,
@@ -21,9 +21,9 @@ interface DomainRecyclerViewMapper {
                 )
             }
 
-        override fun mapGenresToDomain(genresFromDb: List<GenreEntity>): List<RecyclerViewItem> =
+        override fun mapGenresToDomain(genresFromDb: List<GenreEntity>): List<RVFilmItem> =
             genresFromDb.map { genre ->
-                RecyclerViewItem.Genre(name = genre.genreName)
+                RVFilmItem.Genre(name = genre.genreName)
             }
     }
 }
