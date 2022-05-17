@@ -1,4 +1,4 @@
-package com.github.sergey_kornyushin.presentation.ui
+package com.github.sergey_kornyushin.presentation.film_page
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -22,6 +22,6 @@ class FilmPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Picasso.get().load("https://st.kp.yandex.net/images/film_iphone/iphone360_326.jpg").into(binding.imageView)
+        Picasso.get().load("https://st.kp.yandex.net/images/film_iphone/iphone360_326.jpg").into(binding.imgFilmPoster)
     }
 }

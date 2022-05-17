@@ -16,8 +16,8 @@ class FilmPageRepositoryImpl @Inject constructor(
 ) : SelectedFilmRepository {
 
     override fun getSelectedFilm(film: Film): Flow<Resource<Film>> = flow {
-        emit(Resource.Loading())
         try {
+            emit(Resource.Loading())
             emit(Resource.Success(singleFilmMapper.mapFilmToDomain(filmsDao.getFilmById(film.filmId))))
         } catch (e: NullPointerException){
             emit(Resource.Error("Unexpected error"))

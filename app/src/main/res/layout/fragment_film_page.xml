@@ -7,7 +7,7 @@
     android:columnCount="2"
     android:foregroundGravity="center_vertical"
     android:padding="10dp"
-    tools:context=".presentation.ui.FilmPageFragment">
+    tools:context=".presentation.film_page.FilmPageFragment">
 
     <ImageView
         android:id="@+id/img_film_poster"

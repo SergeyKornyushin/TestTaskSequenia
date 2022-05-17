@@ -14,6 +14,7 @@ import com.github.sergey_kornyushin.domain.repository.SortRepository
 import com.github.sergey_kornyushin.domain.use_cases.get_films.GetFilmsUseCase
 import com.github.sergey_kornyushin.domain.use_cases.get_selected_film.GetSelectedFilmUseCase
 import com.github.sergey_kornyushin.domain.use_cases.sort_films.SortFilmsByGenreUseCase
+import com.github.sergey_kornyushin.presentation.film_page.FilmPageFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
@@ -22,10 +23,6 @@ object FragmentManager {
     var currentFrag: Fragment? = null
 
     fun setFragment(newFrag: Fragment, activity: AppCompatActivity) {
-//        val transaction = activity.supportFragmentManager.beginTransaction()
-//        transaction.replace(R.id.fragment_holder, newFrag)
-//        transaction.commit()
-
         activity.supportFragmentManager.beginTransaction()
             .replace(R.id.fragments_container, newFrag)
             .commit()

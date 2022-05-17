@@ -1,4 +1,4 @@
-package com.github.sergey_kornyushin.presentation.main_list.recycler_view
+package com.github.sergey_kornyushin.presentation.films_list.recycler_view
 
 sealed class RVFilmItem{
     data class Title(

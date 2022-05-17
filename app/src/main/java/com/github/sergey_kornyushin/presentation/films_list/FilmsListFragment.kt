@@ -1,11 +1,10 @@
-package com.github.sergey_kornyushin.presentation.ui
+package com.github.sergey_kornyushin.presentation.films_list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.databinding.FragmentFilmsListBinding
 
 class FilmsListFragment : Fragment() {

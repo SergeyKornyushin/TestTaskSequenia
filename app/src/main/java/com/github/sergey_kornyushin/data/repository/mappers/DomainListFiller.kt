@@ -2,7 +2,7 @@ package com.github.sergey_kornyushin.data.repository.mappers
 
 import com.github.sergey_kornyushin.data.database.model.FilmEntity
 import com.github.sergey_kornyushin.data.database.model.GenreEntity
-import com.github.sergey_kornyushin.presentation.main_list.recycler_view.RVFilmItem
+import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
 import javax.inject.Inject
 
 interface DomainListFiller {
