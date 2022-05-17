@@ -18,12 +18,11 @@ interface MappersSet {
             networkFilms: FilmsDto,
             filmsDao: FilmsDao
         ) {
-            val filmsEntity = filmsToDbMapper.map(networkFilms)
-            filmsEntity.forEach { filmsDao.insertFilm(it) }
-            val genresEntity = genresToDbMapper.map(networkFilms)
-            genresEntity.forEach { filmsDao.insertGenre(it) }
-            val filmsGenresEntity = filmsGenresCrossRefMapper.map(networkFilms)
-            filmsGenresEntity.forEach { filmsDao.insertFilmsGenreCrossRef(it) }
+
+            filmsToDbMapper.map(networkFilms).forEach { filmsDao.insertFilm(it) }
+            genresToDbMapper.map(networkFilms).forEach { filmsDao.insertGenre(it) }
+            filmsGenresCrossRefMapper.map(networkFilms)
+                .forEach { filmsDao.insertFilmsGenreCrossRef(it) }
         }
 
     }

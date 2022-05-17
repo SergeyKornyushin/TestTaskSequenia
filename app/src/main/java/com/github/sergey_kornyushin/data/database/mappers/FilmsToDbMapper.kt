@@ -5,8 +5,8 @@ import com.github.sergey_kornyushin.data.remote.dto.FilmsDto
 import javax.inject.Inject
 
 class FilmsToDbMapper @Inject constructor() : ResponseMapper<FilmsDto, List<FilmEntity>> {
-    override fun map(filmsDto: FilmsDto) =
-        filmsDto.filmsDto.map { film ->
+    override fun map(films: FilmsDto) =
+        films.filmsDto.map { film ->
             FilmEntity(
                 filmId = film.id ?: 0,
                 image_url = film.image_url ?: "",

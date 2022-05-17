@@ -8,8 +8,9 @@ import com.github.sergey_kornyushin.data.database.mappers.MappersSet
 import com.github.sergey_kornyushin.data.remote.FilmsApi
 import com.github.sergey_kornyushin.data.repository.FilmsRepositoryImpl
 import com.github.sergey_kornyushin.data.repository.mappers.DomainListFiller
-import com.github.sergey_kornyushin.data.repository.mappers.DomainMapper
+import com.github.sergey_kornyushin.data.repository.mappers.DomainRecyclerViewMapper
 import com.github.sergey_kornyushin.domain.repository.FilmsRepository
+import com.github.sergey_kornyushin.domain.repository.SortRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,6 +34,17 @@ object DomainModule {
 
     @Singleton
     @Provides
+    fun provideSortRepository(
+        filmsDao: FilmsDao,
+        filmsApi: FilmsApi,
+        mappersSet: MappersSet.Base,
+        listFiller: DomainListFiller
+    ): SortRepository {
+        return FilmsRepositoryImpl(filmsDao, filmsApi, mappersSet, listFiller)
+    }
+
+    @Singleton
+    @Provides
     fun provideMappersSet(): MappersSet {
         return MappersSet.Base(
             FilmsToDbMapper(),
@@ -44,6 +56,6 @@ object DomainModule {
     @Singleton
     @Provides
     fun provideDomainListFiller(): DomainListFiller{
-        return DomainListFiller.Base(DomainMapper.Base())
+        return DomainListFiller.Base(DomainRecyclerViewMapper.Base())
     }
 }

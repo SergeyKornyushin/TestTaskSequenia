@@ -6,9 +6,9 @@ import javax.inject.Inject
 
 class FilmsGenresCrossRefMapper @Inject constructor() :
     ResponseMapper<FilmsDto, List<FilmsGenresCrossRef>> {
-    override fun map(filmsDto: FilmsDto): List<FilmsGenresCrossRef> {
+    override fun map(films: FilmsDto): List<FilmsGenresCrossRef> {
         val listFilmsGenres: MutableList<FilmsGenresCrossRef> = mutableListOf()
-        filmsDto.filmsDto.forEach { film ->
+        films.filmsDto.forEach { film ->
             film.genres?.forEach { genre ->
                 listFilmsGenres.add(
                     FilmsGenresCrossRef(

@@ -20,20 +20,6 @@ abstract class FilmsDataBase : RoomDatabase() {
     abstract fun filmsDao(): FilmsDao
 
     companion object {
-        val DATABASE_NAME = "films_db"
-
-//        @Volatile
-//        private var INSTANCE: FilmsDataBase? = null
-//
-//        fun getInstance(context: Context): FilmsDataBase {
-//            synchronized(this) {
-//                return INSTANCE ?: Room.databaseBuilder(
-//                    context, FilmsDataBase::class.java,
-//                    "films_db"
-//                ).build().also {
-//                    INSTANCE = it
-//                }
-//            }
-//        }
+        const val DATABASE_NAME = "films_db"
     }
 }

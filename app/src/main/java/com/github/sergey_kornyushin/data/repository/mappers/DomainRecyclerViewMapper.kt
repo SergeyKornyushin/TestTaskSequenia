@@ -5,12 +5,12 @@ import com.github.sergey_kornyushin.data.database.model.GenreEntity
 import com.github.sergey_kornyushin.presentation.main_list.recycler_view.RecyclerViewItem
 import javax.inject.Inject
 
-interface DomainMapper {
+interface DomainRecyclerViewMapper {
 
     fun mapFilmsToDomain(filmsFromDb: List<FilmEntity>): List<RecyclerViewItem>
     fun mapGenresToDomain(genresFromDb: List<GenreEntity>): List<RecyclerViewItem>
 
-    class Base @Inject constructor() : DomainMapper {
+    class Base @Inject constructor() : DomainRecyclerViewMapper {
         override fun mapFilmsToDomain(filmsFromDb: List<FilmEntity>): List<RecyclerViewItem> =
             filmsFromDb.map { film ->
                 RecyclerViewItem.FilmItem(
