@@ -6,7 +6,6 @@ import androidx.room.Relation
 import com.github.sergey_kornyushin.data.database.model.FilmEntity
 import com.github.sergey_kornyushin.data.database.model.GenreEntity
 
-
 data class GenreWithFilms(
     @Embedded val genreEntity: GenreEntity,
     @Relation(
