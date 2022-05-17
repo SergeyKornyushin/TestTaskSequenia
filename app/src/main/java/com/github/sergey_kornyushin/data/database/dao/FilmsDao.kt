@@ -32,6 +32,10 @@ interface FilmsDao {
     suspend fun getAllGenres(): List<GenreEntity>
 
     @Transaction
-    @Query("SELECT * FROM FilmEntity")
+    @Query("SELECT * FROM FilmEntity ORDER BY localized_name")
     suspend fun getAllFilms(): List<FilmEntity>
+
+    @Transaction
+    @Query("SELECT * FROM FilmEntity WHERE filmId =:filmId")
+    suspend fun getFilmById(filmId: Int): FilmEntity
 }

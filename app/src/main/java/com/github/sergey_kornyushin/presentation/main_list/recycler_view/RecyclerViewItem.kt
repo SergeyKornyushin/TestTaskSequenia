@@ -13,6 +13,7 @@ sealed class RecyclerViewItem{
     data class FilmItem(
         val id: Int,
         val image_url: String,
+        val name: String,
         val localized_name: String,
     ) : RecyclerViewItem()
 }

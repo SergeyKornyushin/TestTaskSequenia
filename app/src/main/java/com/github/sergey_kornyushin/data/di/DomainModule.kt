@@ -6,10 +6,13 @@ import com.github.sergey_kornyushin.data.database.mappers.FilmsToDbMapper
 import com.github.sergey_kornyushin.data.database.mappers.GenresToDbMapper
 import com.github.sergey_kornyushin.data.database.mappers.MappersSet
 import com.github.sergey_kornyushin.data.remote.FilmsApi
+import com.github.sergey_kornyushin.data.repository.FilmPageRepositoryImpl
 import com.github.sergey_kornyushin.data.repository.FilmsRepositoryImpl
 import com.github.sergey_kornyushin.data.repository.mappers.DomainListFiller
 import com.github.sergey_kornyushin.data.repository.mappers.DomainRecyclerViewMapper
+import com.github.sergey_kornyushin.data.repository.mappers.DomainSingleFilmMapper
 import com.github.sergey_kornyushin.domain.repository.FilmsRepository
+import com.github.sergey_kornyushin.domain.repository.SelectedFilmRepository
 import com.github.sergey_kornyushin.domain.repository.SortRepository
 import dagger.Module
 import dagger.Provides
@@ -41,6 +44,15 @@ object DomainModule {
         listFiller: DomainListFiller
     ): SortRepository {
         return FilmsRepositoryImpl(filmsDao, filmsApi, mappersSet, listFiller)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSelectedFilmRepository(
+        filmsDao: FilmsDao,
+        domainSingleFilmMapper: DomainSingleFilmMapper.Base
+    ): SelectedFilmRepository {
+        return FilmPageRepositoryImpl(filmsDao, domainSingleFilmMapper)
     }
 
     @Singleton

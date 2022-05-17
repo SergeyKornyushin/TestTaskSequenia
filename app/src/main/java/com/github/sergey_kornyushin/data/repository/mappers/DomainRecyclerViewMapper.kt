@@ -16,6 +16,7 @@ interface DomainRecyclerViewMapper {
                 RecyclerViewItem.FilmItem(
                     id = film.filmId,
                     image_url = film.image_url,
+                    name = film.name,
                     localized_name = film.localized_name
                 )
             }
