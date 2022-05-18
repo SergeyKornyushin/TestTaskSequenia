@@ -7,6 +7,7 @@ data class FilmDto(
     val localized_name: String? = "",
     val name: String? = "",
     val year: Int? = 0,
-    val rating: Double? = 0.0,
+    val rating: Double? = -1.0,
     val description: String? = ""
 )
+
