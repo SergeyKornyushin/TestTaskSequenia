@@ -34,6 +34,6 @@ object PresentationModule {
 
     @Singleton
     @Provides
-    fun provideGetFilmsUseCase(filmsRepository: FilmsRepository):GetFilmsUseCase =
+    fun provideGetFilmsUseCase(filmsRepository: FilmsRepository): GetFilmsUseCase =
         GetFilmsUseCase.Base(filmsRepository)
 }

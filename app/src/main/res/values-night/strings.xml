@@ -4,4 +4,8 @@
     <string name="film_page_year">Год: %1$s</string>
     <string name="film_page_rating">Рейтинг: %1$s</string>
     <string name="unknown">Неизвестно</string>
+    <string name="genres">Жанры</string>
+    <string name="rv_title_films">Фильмы</string>
+    <string name="unexpected_error">Unexpected error</string>
+    <string name="check_internet_error">Couldn\'t reach server. Check your internet connection</string>
 </resources>

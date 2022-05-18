@@ -37,7 +37,7 @@ class RVFilmsAdapter(private val clickListener: RVClickListener) :
                     LayoutInflater.from(parent.context), parent, false
                 )
             )
-            else -> throw IllegalArgumentException("Invalid ViewType Provided")
+            else -> throw IllegalArgumentException(parent.context.getString(R.string.invalid_type_provided))
         }
     }
 
@@ -57,8 +57,6 @@ class RVFilmsAdapter(private val clickListener: RVClickListener) :
         }
     }
 
-    override fun getItemCount() = list.size
-
     override fun getItemViewType(position: Int): Int {
         return when (list[position]) {
             is RVFilmItem.Title -> R.layout.rv_item_title
@@ -66,4 +64,6 @@ class RVFilmsAdapter(private val clickListener: RVClickListener) :
             is RVFilmItem.FilmItem -> R.layout.rv_item_film
         }
     }
+
+    override fun getItemCount() = list.size
 }

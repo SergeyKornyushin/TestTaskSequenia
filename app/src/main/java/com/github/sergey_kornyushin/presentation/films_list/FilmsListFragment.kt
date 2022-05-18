@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
-import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.databinding.FragmentFilmsListBinding
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVClickListener
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem

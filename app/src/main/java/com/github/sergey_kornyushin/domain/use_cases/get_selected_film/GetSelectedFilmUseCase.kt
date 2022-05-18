@@ -5,7 +5,6 @@ import com.github.sergey_kornyushin.domain.model.Film
 import com.github.sergey_kornyushin.domain.repository.SelectedFilmRepository
 import kotlinx.coroutines.flow.Flow
 
-
 interface GetSelectedFilmUseCase {
     fun getSelectedFilmById(film: Film): Flow<Resource<Film>>
 

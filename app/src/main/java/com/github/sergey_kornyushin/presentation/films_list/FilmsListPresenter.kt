@@ -1,7 +1,9 @@
 package com.github.sergey_kornyushin.presentation.films_list
 
 import android.util.Log
+import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.common.Resource
+import com.github.sergey_kornyushin.common.ResourceProvider
 import com.github.sergey_kornyushin.domain.use_cases.UseCaseExecutor
 import com.github.sergey_kornyushin.domain.use_cases.get_films.GetFilmsUseCase
 import com.github.sergey_kornyushin.domain.use_cases.sort_films.SortFilmsByGenreUseCase
@@ -21,7 +23,8 @@ interface FilmsListPresenter {
     class Base @Inject constructor(
         private val getFilmsUseCase: GetFilmsUseCase,
         private val getSortUseCase: SortFilmsByGenreUseCase,
-        private val presenterMapper: PresenterMapper
+        private val presenterMapper: PresenterMapper,
+        private val resourceProvider: ResourceProvider
     ) : MvpPresenter<FilmsListView>(), UseCaseExecutor<Flow<Resource<List<RVFilmItem>>>>, FilmsListPresenter {
 
         init {
@@ -42,7 +45,7 @@ interface FilmsListPresenter {
                         viewState.showLoading(false)
                     }
                     is Resource.Error -> {
-                        viewState.showError(result.message ?: "Unexpected error")
+                        viewState.showError(result.message ?: resourceProvider.getString(R.string.unexpected_error))
                         viewState.showLoading(false)
                     }
                     is Resource.Loading -> {
@@ -61,11 +64,3 @@ interface FilmsListPresenter {
         }
     }
 }
-
-
-
-
-
-
-
-

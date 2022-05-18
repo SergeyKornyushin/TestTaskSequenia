@@ -1,13 +1,13 @@
 package com.github.sergey_kornyushin.common
 
-fun Int?.avoidNullToString(): String {
-    return this?.toString() ?: "Unknown"
+fun Int?.avoidNullToString(string: String): String {
+    return this?.toString() ?: string
 }
 
-fun Double?.avoidNullToString(): String {
-    return if (this == null || this == -1.0) "Unknown" else this.toString()
+fun Double?.avoidNullToString(string: String): String {
+    return if (this == null || this == -1.0) string else this.toString()
 }
 
-fun String?.avoidNullToString(): String {
-    return if (this.isNullOrEmpty()) "Unknown" else return this
+fun String?.avoidNullToString(string: String): String {
+    return if (this.isNullOrEmpty()) string else return this
 }

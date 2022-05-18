@@ -2,7 +2,6 @@ package com.github.sergey_kornyushin.presentation.film_page
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,6 @@ import androidx.navigation.fragment.navArgs
 import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.databinding.FragmentFilmPageBinding
 import com.github.sergey_kornyushin.domain.model.Film
-import com.github.sergey_kornyushin.presentation.films_list.FilmsListPresenter
-import com.github.sergey_kornyushin.presentation.films_list.FilmsListView
-import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import moxy.MvpAppCompatFragment

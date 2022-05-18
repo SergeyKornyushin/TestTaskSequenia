@@ -9,7 +9,6 @@ import javax.inject.Inject
 interface GetFilmsUseCase {
     fun getFilms(): Flow<Resource<List<RVFilmItem>>>
 
-
     class Base @Inject constructor(private val filmsRepository: FilmsRepository) : GetFilmsUseCase {
         override fun getFilms(): Flow<Resource<List<RVFilmItem>>> {
             return filmsRepository.getAndSaveFilms()

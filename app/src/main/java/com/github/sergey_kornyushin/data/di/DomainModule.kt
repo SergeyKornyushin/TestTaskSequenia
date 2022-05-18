@@ -1,5 +1,6 @@
 package com.github.sergey_kornyushin.data.di
 
+import com.github.sergey_kornyushin.common.ResourceProvider
 import com.github.sergey_kornyushin.data.database.dao.FilmsDao
 import com.github.sergey_kornyushin.data.database.mappers.FilmsGenresCrossRefMapper
 import com.github.sergey_kornyushin.data.database.mappers.FilmsToDbMapper
@@ -30,9 +31,16 @@ object DomainModule {
         filmsDao: FilmsDao,
         filmsApi: FilmsApi,
         mappersSet: MappersSet.Base,
-        listFiller: DomainListFiller
+        listFiller: DomainListFiller,
+        resourceProvider: ResourceProvider
     ): FilmsRepository {
-        return FilmsRepositoryImpl(filmsDao, filmsApi, mappersSet, listFiller)
+        return FilmsRepositoryImpl.Base(
+            filmsDao,
+            filmsApi,
+            mappersSet,
+            listFiller,
+            resourceProvider
+        )
     }
 
     @Singleton
@@ -41,25 +49,33 @@ object DomainModule {
         filmsDao: FilmsDao,
         filmsApi: FilmsApi,
         mappersSet: MappersSet.Base,
-        listFiller: DomainListFiller
+        listFiller: DomainListFiller,
+        resourceProvider: ResourceProvider
     ): SortRepository {
-        return FilmsRepositoryImpl(filmsDao, filmsApi, mappersSet, listFiller)
+        return FilmsRepositoryImpl.Base(
+            filmsDao,
+            filmsApi,
+            mappersSet,
+            listFiller,
+            resourceProvider
+        )
     }
 
     @Singleton
     @Provides
     fun provideSelectedFilmRepository(
         filmsDao: FilmsDao,
-        domainSingleFilmMapper: DomainSingleFilmMapper.Base
+        domainSingleFilmMapper: DomainSingleFilmMapper.Base,
+        resourceProvider: ResourceProvider
     ): SelectedFilmRepository {
-        return FilmPageRepositoryImpl(filmsDao, domainSingleFilmMapper)
+        return FilmPageRepositoryImpl.Base(filmsDao, domainSingleFilmMapper, resourceProvider)
     }
 
     @Singleton
     @Provides
-    fun provideMappersSet(): MappersSet {
+    fun provideMappersSet(resourceProvider: ResourceProvider): MappersSet {
         return MappersSet.Base(
-            FilmsToDbMapper(),
+            FilmsToDbMapper(resourceProvider),
             GenresToDbMapper(),
             FilmsGenresCrossRefMapper()
         )
@@ -67,7 +83,10 @@ object DomainModule {
 
     @Singleton
     @Provides
-    fun provideDomainListFiller(): DomainListFiller{
-        return DomainListFiller.Base(DomainRecyclerViewMapper.Base())
+    fun provideDomainListFiller(
+        domainResourceMapper: DomainRecyclerViewMapper.Base,
+        resourceProvider: ResourceProvider
+    ): DomainListFiller {
+        return DomainListFiller.Base(domainResourceMapper, resourceProvider)
     }
 }
