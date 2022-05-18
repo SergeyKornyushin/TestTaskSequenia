@@ -24,24 +24,14 @@ interface FilmsListPresenter {
         private val presenterMapper: PresenterMapper
     ) : MvpPresenter<FilmsListView>(), UseCaseExecutor<Flow<Resource<List<RVFilmItem>>>>, FilmsListPresenter {
 
-//        override fun onFirstViewAttach() {
-//            super.onFirstViewAttach()
-//            Log.i("test4", "onFirstViewAttach $attachedViews")
-//        }
-//
-//        override fun attachView(view: FilmsListView?) {
-//            super.attachView(view)
-//            Log.i("test4", "attachView $attachedViews")
-//        }
-//
-//        override fun detachView(view: FilmsListView?) {
-//            super.detachView(view)
-//            Log.i("test4", "attachView $attachedViews")
-//        }
-
         init {
             getFilmsList()
             Log.i("test4", "PRESENTER RECREATED")
+        }
+
+        override fun onDestroy() {
+            Log.i("test4", "PRESENTER onDestroy")
+            super.onDestroy()
         }
 
         override fun executeUseCase(useCaseResult: Flow<Resource<List<RVFilmItem>>>) {

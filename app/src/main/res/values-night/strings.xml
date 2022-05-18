@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="image_not_found">Изображение не найдено</string>
+    <string name="film_page_year">Год: %1$s</string>
+    <string name="film_page_rating">Рейтинг: %1$s</string>
+    <string name="unknown">Неизвестно</string>
 </resources>

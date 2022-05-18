@@ -1,6 +1,7 @@
 package com.github.sergey_kornyushin.presentation.films_list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,5 +75,10 @@ class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener
                 filmName
             )
         )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("test4", "onDestroy: fragment1")
     }
 }

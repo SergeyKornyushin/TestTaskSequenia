@@ -52,6 +52,11 @@ class FilmPageFragment : MvpAppCompatFragment(), FilmPageView{
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("test4", "onDestroy: fragment2")
+    }
+
     override fun showFilm(film: Film) {
         binding.apply {
             tvFilmTitle.text = film.name

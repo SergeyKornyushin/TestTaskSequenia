@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">TestTaskSequenia</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="image_not_found">Изображение не найдено</string>
     <string name="film_page_year">Год: %1$s</string>
     <string name="film_page_rating">Рейтинг: %1$s</string>
+    <string name="unknown">Неизвестно</string>
 
 </resources>
