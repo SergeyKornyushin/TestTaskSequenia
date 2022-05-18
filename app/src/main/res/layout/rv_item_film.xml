@@ -43,6 +43,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="2"
+        android:paddingHorizontal="5dp"
         android:textColor="@color/my_text"
         android:textSize="16sp"
         tools:text="Побег из Шоушенка фывффыa sdasdasdasda sdasdasda dsasdasdasdasdвфывфвыфывфв" />

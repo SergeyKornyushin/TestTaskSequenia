@@ -14,6 +14,7 @@ sealed class RVFilmHolder(binding: ViewBinding) : RecyclerView.ViewHolder(bindin
     ) : RVFilmHolder(binding) {
         fun bind(title: RVFilmItem.Title) {
             binding.tvRvTitle.text = title.title
+
         }
     }
 
@@ -28,7 +29,8 @@ sealed class RVFilmHolder(binding: ViewBinding) : RecyclerView.ViewHolder(bindin
     data class FilmViewHolder(
         private val binding: RvItemFilmBinding
     ) : RVFilmHolder(binding) {
-        fun bind(filmItem: RVFilmItem.FilmItem) {
+        fun bind(filmItem: RVFilmItem.FilmItem, clickListener: RVClickListener) {
+            binding.root.setOnClickListener { clickListener.filmClick(filmItem.id, filmItem.localized_name) }
             binding.tvFilmName.text = filmItem.name
             if (filmItem.image_url.isNotEmpty()) {
                 Picasso.get().load(filmItem.image_url).into(binding.imgPoster)

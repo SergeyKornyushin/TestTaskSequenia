@@ -9,7 +9,8 @@ import com.github.sergey_kornyushin.databinding.RvItemFilmBinding
 import com.github.sergey_kornyushin.databinding.RvItemGenreBinding
 import com.github.sergey_kornyushin.databinding.RvItemTitleBinding
 
-class RVFilmsAdapter : RecyclerView.Adapter<RVFilmHolder>() {
+class RVFilmsAdapter(private val clickListener: RVClickListener) :
+    RecyclerView.Adapter<RVFilmHolder>() {
 
     private val differ = AsyncListDiffer(this, DiffCallback())
 
@@ -31,13 +32,11 @@ class RVFilmsAdapter : RecyclerView.Adapter<RVFilmHolder>() {
                     LayoutInflater.from(parent.context), parent, false
                 )
             )
-            R.layout.rv_item_film -> {
-                val view = RvItemFilmBinding.inflate(
+            R.layout.rv_item_film -> RVFilmHolder.FilmViewHolder(
+                RvItemFilmBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false
                 )
-                view.tvFilmName.setOnClickListener {}
-                RVFilmHolder.FilmViewHolder(view)
-            }
+            )
             else -> throw IllegalArgumentException("Invalid ViewType Provided")
         }
     }
@@ -46,7 +45,10 @@ class RVFilmsAdapter : RecyclerView.Adapter<RVFilmHolder>() {
         when (holder) {
             is RVFilmHolder.TitleViewHolder -> holder.bind(list[position] as RVFilmItem.Title)
             is RVFilmHolder.GenreViewHolder -> holder.bind(list[position] as RVFilmItem.Genre)
-            is RVFilmHolder.FilmViewHolder -> holder.bind(list[position] as RVFilmItem.FilmItem)
+            is RVFilmHolder.FilmViewHolder -> holder.bind(
+                list[position] as RVFilmItem.FilmItem,
+                clickListener
+            )
         }
     }
 

@@ -2,7 +2,9 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -70,6 +72,16 @@ dependencies {
     def hiltVersion = "2.42"
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
+
+    // Moxy
+    def moxyVersion = "2.2.2"
+    kapt "com.github.moxy-community:moxy-compiler:$moxyVersion"
+    implementation "com.github.moxy-community:moxy-ktx:$moxyVersion"
+    implementation "com.github.moxy-community:moxy-androidx:$moxyVersion"
+
+    // Navigation Component
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
     // ViewModel
     def lifecycle_version = "2.4.1"

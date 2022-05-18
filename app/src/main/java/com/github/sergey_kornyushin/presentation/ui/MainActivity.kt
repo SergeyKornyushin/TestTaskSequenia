@@ -5,6 +5,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.domain.model.Film
 import com.github.sergey_kornyushin.domain.model.Genre
@@ -15,60 +18,28 @@ import com.github.sergey_kornyushin.domain.use_cases.get_films.GetFilmsUseCase
 import com.github.sergey_kornyushin.domain.use_cases.get_selected_film.GetSelectedFilmUseCase
 import com.github.sergey_kornyushin.domain.use_cases.sort_films.SortFilmsByGenreUseCase
 import com.github.sergey_kornyushin.presentation.film_page.FilmPageFragment
+import com.github.sergey_kornyushin.presentation.films_list.FilmsListFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
-object FragmentManager {
-    var currentFrag: Fragment? = null
-
-    fun setFragment(newFrag: Fragment, activity: AppCompatActivity) {
-        activity.supportFragmentManager.beginTransaction()
-            .replace(R.id.fragments_container, newFrag)
-            .commit()
-
-        currentFrag = newFrag
-    }
-}
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var repo: FilmsRepository
-
-    @Inject
-    lateinit var sortRepo: SortRepository
-
-    @Inject
-    lateinit var getSelectedRepo: SelectedFilmRepository
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        FragmentManager.setFragment(FilmPageFragment(), this)
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHost.navController
 
-        val filmsUseCase = GetFilmsUseCase(repo)
 
-        val genre = Genre("триллер")
-        val sortUseCase = SortFilmsByGenreUseCase(sortRepo)
-
-        val film = Film(filmId = 435)
-        val getSelectedUseCase = GetSelectedFilmUseCase(getSelectedRepo)
-
-        lifecycleScope.launchWhenCreated {
-            filmsUseCase.getFilms().collect { value ->
-                Log.i("test4", "getFilms: ${value.data} | message ${value.message}")
-            }
-
-            sortUseCase.getFilmsByGenre(genre).collect { value ->
-                Log.i("test4", "getFilmsByGenre: ${value.data} | message ${value.message}")
-            }
-
-            getSelectedUseCase.getSelectedFilmById(film).collect { value ->
-                Log.i("test4", "getSelectedFilm: ${value.data} | message ${value.message}")
-            }
-        }
+        NavigationUI.setupActionBarWithNavController(this, navController)
     }
+
+    override fun onSupportNavigateUp() = navController.navigateUp() || super.onSupportNavigateUp()
+
 }

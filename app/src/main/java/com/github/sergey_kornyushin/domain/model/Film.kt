@@ -1,5 +1,10 @@
 package com.github.sergey_kornyushin.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+
+@Parcelize
 data class Film(
     val filmId: Int,
     val image_url: String = "",
@@ -8,4 +13,4 @@ data class Film(
     val year: Int = 0,
     val rating: String = "",
     val description: String = ""
-)
+) : Parcelable
