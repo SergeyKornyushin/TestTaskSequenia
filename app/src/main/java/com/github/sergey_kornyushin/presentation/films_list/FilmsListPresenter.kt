@@ -60,13 +60,15 @@ class FilmsListPresenter @Inject constructor(
         getSortUseCase.getFilmsByGenre(presenterMapper.mapGenreToDomain(genre)).onEach { result ->
             when (result) {
                 is Resource.Success -> {
-
+                    viewState.fillRVList(result.data ?: mutableListOf())
+                    viewState.showLoading(false)
                 }
                 is Resource.Error -> {
-
+                    viewState.showError(result.message ?: "Unexpected error")
+                    viewState.showLoading(false)
                 }
                 is Resource.Loading -> {
-
+                    viewState.showLoading(true)
                 }
             }
         }.launchIn(scope = presenterScope)

@@ -7,22 +7,28 @@ import com.github.sergey_kornyushin.databinding.RvItemGenreBinding
 import com.github.sergey_kornyushin.databinding.RvItemTitleBinding
 import com.squareup.picasso.Picasso
 
-sealed class RVFilmHolder(binding: ViewBinding) : RecyclerView.ViewHolder(binding.root){
+sealed class RVFilmHolder(binding: ViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
     data class TitleViewHolder(
         private val binding: RvItemTitleBinding
     ) : RVFilmHolder(binding) {
         fun bind(title: RVFilmItem.Title) {
             binding.tvRvTitle.text = title.title
-
         }
     }
 
     data class GenreViewHolder(
         private val binding: RvItemGenreBinding
     ) : RVFilmHolder(binding) {
-        fun bind(genre: RVFilmItem.Genre) {
-            binding.tvRvTitle.text = genre.name
+        fun bind(
+            genre: RVFilmItem.Genre, clickListener: RVClickListener
+        ) {
+            binding.apply {
+                tvRvTitle.text = genre.name
+                root.setOnClickListener {
+                    clickListener.genreClick(genre)
+                }
+            }
         }
     }
 
@@ -30,12 +36,19 @@ sealed class RVFilmHolder(binding: ViewBinding) : RecyclerView.ViewHolder(bindin
         private val binding: RvItemFilmBinding
     ) : RVFilmHolder(binding) {
         fun bind(filmItem: RVFilmItem.FilmItem, clickListener: RVClickListener) {
-            binding.root.setOnClickListener { clickListener.filmClick(filmItem.id, filmItem.localized_name) }
-            binding.tvFilmName.text = filmItem.name
-            if (filmItem.image_url.isNotEmpty()) {
-                Picasso.get().load(filmItem.image_url).into(binding.imgPoster)
-            } else {
-                binding.imgPoster.setImageResource(0)
+            binding.apply {
+                root.setOnClickListener {
+                    clickListener.filmClick(
+                        filmItem.id,
+                        filmItem.localized_name
+                    )
+                }
+                tvFilmName.text = filmItem.localized_name
+                if (filmItem.image_url.isNotEmpty()) {
+                    Picasso.get().load(filmItem.image_url).into(binding.imgPoster)
+                } else {
+                    binding.imgPoster.setImageResource(0)
+                }
             }
         }
     }

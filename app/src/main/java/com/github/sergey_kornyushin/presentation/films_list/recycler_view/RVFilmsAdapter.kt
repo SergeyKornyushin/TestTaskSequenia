@@ -43,8 +43,13 @@ class RVFilmsAdapter(private val clickListener: RVClickListener) :
 
     override fun onBindViewHolder(holder: RVFilmHolder, position: Int) {
         when (holder) {
-            is RVFilmHolder.TitleViewHolder -> holder.bind(list[position] as RVFilmItem.Title)
-            is RVFilmHolder.GenreViewHolder -> holder.bind(list[position] as RVFilmItem.Genre)
+            is RVFilmHolder.TitleViewHolder -> holder.bind(
+                list[position] as RVFilmItem.Title
+            )
+            is RVFilmHolder.GenreViewHolder -> holder.bind(
+                list[position] as RVFilmItem.Genre,
+                clickListener
+            )
             is RVFilmHolder.FilmViewHolder -> holder.bind(
                 list[position] as RVFilmItem.FilmItem,
                 clickListener

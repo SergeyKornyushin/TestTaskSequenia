@@ -1,12 +1,12 @@
 package com.github.sergey_kornyushin.presentation.films_list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.databinding.FragmentFilmsListBinding
@@ -70,8 +70,8 @@ class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener
         rvFilmsAdapter.list = filmsList
     }
 
-    override fun genreClick(position: Int) {
-        TODO("Not yet implemented")
+    override fun genreClick(genre: RVFilmItem.Genre) {
+        presenter.sortFilmsByGenre(genre)
     }
 
     override fun filmClick(filmId: Int, filmName: String) {

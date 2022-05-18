@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginStart="3dp"
     android:layout_marginTop="6dp"
     android:layout_marginEnd="3dp"
-    android:background="@drawable/layer_border_background">
+    android:backgroundTint="@color/my_gray"
+    app:cardCornerRadius="16dp">
 
     <TextView
         android:id="@+id/tv_rv_title"
@@ -18,4 +20,4 @@
         android:textColor="@color/my_text"
         android:textStyle="bold"
         tools:text="title"/>
-</FrameLayout>
+</androidx.cardview.widget.CardView>
