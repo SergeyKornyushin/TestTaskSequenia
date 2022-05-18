@@ -5,8 +5,14 @@ import com.github.sergey_kornyushin.domain.model.Film
 import com.github.sergey_kornyushin.domain.repository.SelectedFilmRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetSelectedFilmUseCase(private val selectedFilmRepository: SelectedFilmRepository) {
-    fun getSelectedFilmById(film: Film): Flow<Resource<Film>> {
-        return selectedFilmRepository.getSelectedFilm(film)
+
+interface GetSelectedFilmUseCase {
+    fun getSelectedFilmById(film: Film): Flow<Resource<Film>>
+
+    class Base(private val selectedFilmRepository: SelectedFilmRepository) :
+        GetSelectedFilmUseCase {
+        override fun getSelectedFilmById(film: Film): Flow<Resource<Film>> {
+            return selectedFilmRepository.getSelectedFilm(film)
+        }
     }
 }

@@ -26,7 +26,7 @@ class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener
     private val rvFilmsAdapter = RVFilmsAdapter(this)
 
     @Inject
-    lateinit var presenterProvider: Provider<FilmsListPresenter>
+    lateinit var presenterProvider: Provider<FilmsListPresenter.Base>
 
     private val presenter by moxyPresenter { presenterProvider.get() }
 
@@ -42,7 +42,6 @@ class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener
         super.onViewCreated(view, savedInstanceState)
 
         val gridLayoutManager = GridLayoutManager(context, 2)
-
         gridLayoutManager.spanSizeLookup = RVFilmsSpanSize(rvFilmsAdapter)
 
         binding.rvFilmsList.apply {
@@ -50,16 +49,10 @@ class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener
             setHasFixedSize(true)
             adapter = rvFilmsAdapter
         }
-
-//        presenter.getFilmsList()
     }
 
     override fun showError(message: String) {
 
-    }
-
-    override fun showSortedFilms() {
-        TODO("Not yet implemented")
     }
 
     override fun showLoading(isLoading: Boolean) {

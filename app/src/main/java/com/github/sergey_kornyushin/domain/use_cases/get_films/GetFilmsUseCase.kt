@@ -6,8 +6,13 @@ import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilm
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetFilmsUseCase @Inject constructor(private val filmsRepository: FilmsRepository) {
-    fun getFilms(): Flow<Resource<List<RVFilmItem>>> {
-        return filmsRepository.getAndSaveFilms()
+interface GetFilmsUseCase {
+    fun getFilms(): Flow<Resource<List<RVFilmItem>>>
+
+
+    class Base @Inject constructor(private val filmsRepository: FilmsRepository) : GetFilmsUseCase {
+        override fun getFilms(): Flow<Resource<List<RVFilmItem>>> {
+            return filmsRepository.getAndSaveFilms()
+        }
     }
 }

@@ -11,7 +11,6 @@ import moxy.viewstate.strategy.alias.OneExecution
 @StateStrategyType(value = AddToEndSingleStrategy::class)
 interface FilmsListView : MvpView{
     fun showError(message: String)
-    fun showSortedFilms()
     fun showLoading(isLoading: Boolean)
     fun fillRVList(filmsList: List<RVFilmItem>)
 }

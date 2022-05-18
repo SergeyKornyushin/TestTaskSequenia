@@ -7,8 +7,13 @@ import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilm
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class SortFilmsByGenreUseCase @Inject constructor(private val sortRepository: SortRepository) {
-    fun getFilmsByGenre(genre: Genre): Flow<Resource<List<RVFilmItem>>> {
-        return sortRepository.sortFilmsByGenre(genre)
+interface SortFilmsByGenreUseCase {
+    fun getFilmsByGenre(genre: Genre): Flow<Resource<List<RVFilmItem>>>
+
+    class Base @Inject constructor(private val sortRepository: SortRepository) :
+        SortFilmsByGenreUseCase {
+        override fun getFilmsByGenre(genre: Genre): Flow<Resource<List<RVFilmItem>>> {
+            return sortRepository.sortFilmsByGenre(genre)
+        }
     }
 }
