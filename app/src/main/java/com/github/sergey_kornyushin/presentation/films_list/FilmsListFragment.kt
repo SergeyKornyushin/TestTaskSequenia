@@ -48,9 +48,7 @@ class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener
         val gridLayoutManager = GridLayoutManager(context, 2)
         gridLayoutManager.spanSizeLookup = RVFilmsSpanSize(rvFilmsAdapter)
 
-
         binding.rvFilmsList.apply {
-            (itemAnimator as SimpleItemAnimator).dispatchAnimationsFinished()
             layoutManager = gridLayoutManager
             setHasFixedSize(true)
             adapter = rvFilmsAdapter

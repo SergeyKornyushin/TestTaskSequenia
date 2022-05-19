@@ -6,6 +6,7 @@
     <string name="unknown">Неизвестно</string>
     <string name="genres">Жанры</string>
     <string name="rv_title_films">Фильмы</string>
-    <string name="unexpected_error">Unexpected error</string>
-    <string name="check_internet_error">Couldn\'t reach server. Check your internet connection</string>
+    <string name="unexpected_error">Произошла непредвиденная ошибка</string>
+    <string name="check_internet_error">Нет соединения с сервером. Проверьте подключение к интернету</string>
+    <string name="invalid_type_provided">Invalid ViewType Provided</string>
 </resources>
