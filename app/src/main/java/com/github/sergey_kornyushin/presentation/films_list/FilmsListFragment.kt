@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.github.sergey_kornyushin.databinding.FragmentFilmsListBinding
 import com.github.sergey_kornyushin.presentation.extentions.snackbar
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
@@ -47,7 +48,9 @@ class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener
         val gridLayoutManager = GridLayoutManager(context, 2)
         gridLayoutManager.spanSizeLookup = RVFilmsSpanSize(rvFilmsAdapter)
 
+
         binding.rvFilmsList.apply {
+            (itemAnimator as SimpleItemAnimator).dispatchAnimationsFinished()
             layoutManager = gridLayoutManager
             setHasFixedSize(true)
             adapter = rvFilmsAdapter

@@ -12,7 +12,11 @@ class DiffCallback : DiffUtil.ItemCallback<RVFilmItem>() {
         val isSameFilm = oldItem is RVFilmItem.FilmItem
                 && newItem is RVFilmItem.FilmItem
                 && oldItem.id == newItem.id
-        return isSameGenre || isSameFilm
+
+        val isSameTitle = oldItem is RVFilmItem.Title
+                && newItem is RVFilmItem.Title
+                && oldItem.id == newItem.id
+        return isSameGenre || isSameFilm || isSameTitle
     }
 
     override fun areContentsTheSame(oldItem: RVFilmItem, newItem: RVFilmItem) =
