@@ -44,7 +44,7 @@ class FilmPageFragment : MvpAppCompatFragment(), FilmPageView {
     }
 
     override fun showLoading(isLoading: Boolean) {
-
+        binding.pbImageDownloading.isVisible = isLoading
     }
 
     override fun showError(message: String) {
