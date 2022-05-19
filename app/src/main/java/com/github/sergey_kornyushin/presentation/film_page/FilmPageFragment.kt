@@ -40,6 +40,10 @@ class FilmPageFragment : MvpAppCompatFragment(), FilmPageView {
         presenter.getFilm(args.filmId)
     }
 
+    override fun showLoading(isLoading: Boolean) {
+
+    }
+
     override fun showError(message: String) {
 
     }
