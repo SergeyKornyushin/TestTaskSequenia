@@ -19,13 +19,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DomainModule {
 
-    @Singleton
     @Provides
     fun provideFilmsRepository(
         filmsDao: FilmsDao,
@@ -43,7 +41,6 @@ object DomainModule {
         )
     }
 
-    @Singleton
     @Provides
     fun provideSortRepository(
         filmsDao: FilmsDao,
@@ -61,7 +58,6 @@ object DomainModule {
         )
     }
 
-    @Singleton
     @Provides
     fun provideSelectedFilmRepository(
         filmsDao: FilmsDao,
@@ -71,7 +67,6 @@ object DomainModule {
         return FilmPageRepositoryImpl.Base(filmsDao, domainSingleFilmMapper, resourceProvider)
     }
 
-    @Singleton
     @Provides
     fun provideMappersSet(resourceProvider: ResourceProvider): MappersSet {
         return MappersSet.Base(
@@ -81,7 +76,6 @@ object DomainModule {
         )
     }
 
-    @Singleton
     @Provides
     fun provideDomainListFiller(
         domainResourceMapper: DomainRecyclerViewMapper.Base,

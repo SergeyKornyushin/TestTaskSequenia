@@ -92,7 +92,7 @@ class RVFilmsAdapter @Inject constructor(private var selectedItemPosition: Selec
         }
     }
 
-    companion object{
+    private companion object{
         private const val DEFAULT_POSITION = -1
     }
 }

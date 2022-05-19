@@ -13,7 +13,7 @@ class RVFilmsSpanSize(private val rvAdapter: RVFilmsAdapter) : GridLayoutManager
         }
     }
 
-    companion object{
+    private companion object{
         private const val SPAN_COUNT = 2
         private const val SINGLE_LINE = 2
         private const val DOUBLE_LINE = 1

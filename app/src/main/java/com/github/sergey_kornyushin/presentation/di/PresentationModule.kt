@@ -22,22 +22,19 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object PresentationModule {
 
-    @Singleton
     @Provides
     fun providePresenterMapper(): PresenterMapper =
         PresenterMapper.Base()
 
-    @Singleton
     @Provides
     fun provideSortFilmsByGenreUseCase(sortRepository: SortRepository): SortFilmsByGenreUseCase =
         SortFilmsByGenreUseCase.Base(sortRepository)
 
-    @Singleton
     @Provides
     fun provideGetSelectedFilmUseCase(selectedFilmRepository: SelectedFilmRepository): GetSelectedFilmUseCase =
         GetSelectedFilmUseCase.Base(selectedFilmRepository)
 
-    @Singleton
+
     @Provides
     fun provideGetFilmsUseCase(filmsRepository: FilmsRepository): GetFilmsUseCase =
         GetFilmsUseCase.Base(filmsRepository)
@@ -46,12 +43,10 @@ object PresentationModule {
     @Provides
     fun provideSelectedPositionSaver(): SelectedPositionSaver = SelectedPositionSaver(-1)
 
-    @Singleton
     @Provides
     fun provideCoroutineScope(): CoroutineScope =
         CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
-    @Singleton
     @Provides
     fun provideCacheGenreItem(): CacheGenreItem = CacheGenreItem()
 }
