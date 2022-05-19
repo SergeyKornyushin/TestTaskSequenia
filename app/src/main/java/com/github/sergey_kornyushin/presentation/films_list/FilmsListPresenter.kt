@@ -1,6 +1,5 @@
 package com.github.sergey_kornyushin.presentation.films_list
 
-import android.util.Log
 import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.common.Resource
 import com.github.sergey_kornyushin.common.ResourceProvider
@@ -14,38 +13,34 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import moxy.MvpPresenter
 import moxy.presenterScope
+import java.text.FieldPosition
 import javax.inject.Inject
 
 interface FilmsListPresenter {
     fun getFilmsList()
-    fun sortFilmsByGenre(genre: RVFilmItem.Genre)
+    fun sortFilmsByGenre(genre: RVFilmItem.Genre, position: Int)
 
     class Base @Inject constructor(
         private val getFilmsUseCase: GetFilmsUseCase,
         private val getSortUseCase: SortFilmsByGenreUseCase,
         private val presenterMapper: PresenterMapper,
         private val resourceProvider: ResourceProvider
-    ) : MvpPresenter<FilmsListView>(), UseCaseExecutor<Flow<Resource<List<RVFilmItem>>>>, FilmsListPresenter {
-
-        init {
-            getFilmsList()
-            Log.i("test4", "PRESENTER RECREATED")
-        }
-
-        override fun onDestroy() {
-            Log.i("test4", "PRESENTER onDestroy")
-            super.onDestroy()
-        }
+    ) : MvpPresenter<FilmsListView>(), UseCaseExecutor<Flow<Resource<List<RVFilmItem>>>>,
+        FilmsListPresenter {
 
         override fun executeUseCase(useCaseResult: Flow<Resource<List<RVFilmItem>>>) {
             useCaseResult.onEach { result ->
                 when (result) {
                     is Resource.Success -> {
-                        viewState.fillRVList(result.data ?: mutableListOf())
+                        val mutableList: MutableList<RVFilmItem> = mutableListOf()
+                        mutableList.addAll(result.data ?: mutableList)
+                        viewState.fillRVList(mutableList)
                         viewState.showLoading(false)
                     }
                     is Resource.Error -> {
-                        viewState.showError(result.message ?: resourceProvider.getString(R.string.unexpected_error))
+                        viewState.showError(
+                            result.message ?: resourceProvider.getString(R.string.unexpected_error)
+                        )
                         viewState.showLoading(false)
                     }
                     is Resource.Loading -> {
@@ -55,11 +50,15 @@ interface FilmsListPresenter {
             }.launchIn(scope = presenterScope)
         }
 
+        init {
+            getFilmsList()
+        }
+
         override fun getFilmsList() {
             executeUseCase(getFilmsUseCase.getFilms())
         }
 
-        override fun sortFilmsByGenre(genre: RVFilmItem.Genre) {
+        override fun sortFilmsByGenre(genre: RVFilmItem.Genre, position: Int) {
             executeUseCase(getSortUseCase.getFilmsByGenre(presenterMapper.mapGenreToDomain(genre)))
         }
     }

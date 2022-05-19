@@ -7,7 +7,8 @@ sealed class RVFilmItem{
     ) : RVFilmItem()
 
     data class Genre(
-        val name: String
+        val name: String,
+        var isChecked: Boolean = false
     ) : RVFilmItem()
 
     data class FilmItem(

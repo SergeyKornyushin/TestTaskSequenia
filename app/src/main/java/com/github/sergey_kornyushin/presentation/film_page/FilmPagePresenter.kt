@@ -1,6 +1,5 @@
 package com.github.sergey_kornyushin.presentation.film_page
 
-import android.util.Log
 import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.common.Resource
 import com.github.sergey_kornyushin.common.ResourceProvider
@@ -25,15 +24,6 @@ interface FilmPagePresenter {
 
         override fun getFilm(filmId: Int) {
             executeUseCase(getSelectedFilmUseCase.getSelectedFilmById(Film(filmId = filmId)))
-        }
-
-        init {
-            Log.i("test4", "PRESENTER TWO RECREATED")
-        }
-
-        override fun onDestroy() {
-            Log.i("test4", "PRESENTER TWO onDestroy")
-            super.onDestroy()
         }
 
         override fun executeUseCase(useCaseResult: Flow<Resource<Film>>) {

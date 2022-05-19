@@ -27,7 +27,7 @@ interface FilmsRepositoryImpl{
         private val resourceProvider: ResourceProvider
     ) : FilmsRepositoryImpl, FilmsRepository, SortRepository {
 
-        override fun getAndSaveFilms(): Flow<Resource<List<RVFilmItem>>> = flow {
+        override fun getFilms(): Flow<Resource<List<RVFilmItem>>> = flow {
             try {
                 emit(Resource.Loading())
                 mappers.saveFilms(api.getFilms(), filmsDao)

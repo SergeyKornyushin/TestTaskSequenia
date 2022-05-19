@@ -1,5 +1,6 @@
 package com.github.sergey_kornyushin.presentation.films_list.recycler_view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -8,17 +9,28 @@ import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.databinding.RvItemFilmBinding
 import com.github.sergey_kornyushin.databinding.RvItemGenreBinding
 import com.github.sergey_kornyushin.databinding.RvItemTitleBinding
+import javax.inject.Inject
 
-class RVFilmsAdapter(private val clickListener: RVClickListener) :
-    RecyclerView.Adapter<RVFilmHolder>() {
+class RVFilmsAdapter @Inject constructor(private var selectedItemPosition: SelectedPositionSaver) :
+    RecyclerView.Adapter<RVFilmHolder>(), RVGenreClick {
+
+    private lateinit var clickListener: RVClickListener
 
     private val differ = AsyncListDiffer(this, DiffCallback())
 
-    var list: List<RVFilmItem>
+    var list: MutableList<RVFilmItem>
         get() = differ.currentList
         set(value) {
             differ.submitList(value)
         }
+
+    fun setClickListener(clickListener: RVClickListener){
+        this.clickListener = clickListener
+    }
+
+    init {
+        Log.i("test4", "init: $selectedItemPosition ${selectedItemPosition.hashCode()}")
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVFilmHolder {
         return when (viewType) {
@@ -46,10 +58,14 @@ class RVFilmsAdapter(private val clickListener: RVClickListener) :
             is RVFilmHolder.TitleViewHolder -> holder.bind(
                 list[position] as RVFilmItem.Title
             )
-            is RVFilmHolder.GenreViewHolder -> holder.bind(
-                list[position] as RVFilmItem.Genre,
-                clickListener
-            )
+            is RVFilmHolder.GenreViewHolder -> {
+                holder.bind(
+                    list[position] as RVFilmItem.Genre,
+                    clickListener,
+                    position == selectedItemPosition.position,
+                    this
+                )
+            }
             is RVFilmHolder.FilmViewHolder -> holder.bind(
                 list[position] as RVFilmItem.FilmItem,
                 clickListener
@@ -66,4 +82,12 @@ class RVFilmsAdapter(private val clickListener: RVClickListener) :
     }
 
     override fun getItemCount() = list.size
+
+    override fun setSingleSelection(adapterPosition: Int) {
+        if (adapterPosition == RecyclerView.NO_POSITION) return
+
+        notifyItemChanged(selectedItemPosition.position)
+        selectedItemPosition.position = adapterPosition
+        notifyItemChanged(adapterPosition)
+    }
 }

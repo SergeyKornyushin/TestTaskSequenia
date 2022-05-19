@@ -5,5 +5,5 @@ import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilm
 import kotlinx.coroutines.flow.Flow
 
 interface FilmsRepository {
-    fun getAndSaveFilms(): Flow<Resource<List<RVFilmItem>>>
+    fun getFilms(): Flow<Resource<List<RVFilmItem>>>
 }

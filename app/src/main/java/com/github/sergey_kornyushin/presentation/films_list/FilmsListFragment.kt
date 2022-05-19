@@ -22,7 +22,9 @@ import javax.inject.Provider
 @AndroidEntryPoint
 class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener {
     private lateinit var binding: FragmentFilmsListBinding
-    private val rvFilmsAdapter = RVFilmsAdapter(this)
+
+    @Inject
+    lateinit var rvFilmsAdapter: RVFilmsAdapter
 
     @Inject
     lateinit var presenterProvider: Provider<FilmsListPresenter.Base>
@@ -40,6 +42,7 @@ class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        rvFilmsAdapter.setClickListener(this)
         val gridLayoutManager = GridLayoutManager(context, 2)
         gridLayoutManager.spanSizeLookup = RVFilmsSpanSize(rvFilmsAdapter)
 
@@ -58,12 +61,12 @@ class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener
         binding.pbDownload.isVisible = isLoading
     }
 
-    override fun fillRVList(filmsList: List<RVFilmItem>) {
+    override fun fillRVList(filmsList: MutableList<RVFilmItem>) {
         rvFilmsAdapter.list = filmsList
     }
 
-    override fun genreClick(genre: RVFilmItem.Genre) {
-        presenter.sortFilmsByGenre(genre)
+    override fun genreClick(genre: RVFilmItem.Genre, position: Int) {
+        presenter.sortFilmsByGenre(genre, position)
     }
 
     override fun filmClick(filmId: Int, filmName: String) {
@@ -73,10 +76,5 @@ class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener
                 filmName
             )
         )
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.i("test4", "onDestroy: fragment1")
     }
 }

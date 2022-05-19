@@ -9,5 +9,5 @@ import moxy.viewstate.strategy.StateStrategyType
 interface FilmsListView : MvpView{
     fun showError(message: String)
     fun showLoading(isLoading: Boolean)
-    fun fillRVList(filmsList: List<RVFilmItem>)
+    fun fillRVList(filmsList: MutableList<RVFilmItem>)
 }

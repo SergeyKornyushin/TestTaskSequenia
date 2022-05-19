@@ -7,6 +7,7 @@ class DiffCallback : DiffUtil.ItemCallback<RVFilmItem>() {
         val isSameGenre = oldItem is RVFilmItem.Genre
                 && newItem is RVFilmItem.Genre
                 && oldItem.name == newItem.name
+                && oldItem.isChecked == newItem.isChecked
 
         val isSameFilm = oldItem is RVFilmItem.FilmItem
                 && newItem is RVFilmItem.FilmItem

@@ -11,7 +11,7 @@ interface GetFilmsUseCase {
 
     class Base @Inject constructor(private val filmsRepository: FilmsRepository) : GetFilmsUseCase {
         override fun getFilms(): Flow<Resource<List<RVFilmItem>>> {
-            return filmsRepository.getAndSaveFilms()
+            return filmsRepository.getFilms()
         }
     }
 }

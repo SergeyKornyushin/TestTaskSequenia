@@ -1,7 +1,10 @@
 package com.github.sergey_kornyushin.presentation.films_list.recycler_view
 
+import android.graphics.Color
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.databinding.RvItemFilmBinding
 import com.github.sergey_kornyushin.databinding.RvItemGenreBinding
 import com.github.sergey_kornyushin.databinding.RvItemTitleBinding
@@ -21,14 +24,27 @@ sealed class RVFilmHolder(binding: ViewBinding) : RecyclerView.ViewHolder(bindin
         private val binding: RvItemGenreBinding
     ) : RVFilmHolder(binding) {
         fun bind(
-            genre: RVFilmItem.Genre, clickListener: RVClickListener
+            genre: RVFilmItem.Genre,
+            clickListener: RVClickListener,
+            isSelected: Boolean,
+            adapterClick: RVGenreClick
         ) {
-            binding.apply {
+            with(binding) {
+                if (isSelected) {
+                    genreItem.background =
+                        ContextCompat.getDrawable(genreItem.context, R.drawable.light_background)
+                } else {
+                    genreItem.background =
+                        ContextCompat.getDrawable(genreItem.context, R.drawable.dark_background)
+                }
                 tvRvTitle.text = genre.name
                 root.setOnClickListener {
-                    clickListener.genreClick(genre)
+                    clickListener.genreClick(genre, position)
+                    adapterClick.setSingleSelection(adapterPosition)
                 }
+
             }
+
         }
     }
 

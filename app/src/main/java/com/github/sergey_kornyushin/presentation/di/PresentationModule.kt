@@ -6,6 +6,8 @@ import com.github.sergey_kornyushin.domain.repository.SortRepository
 import com.github.sergey_kornyushin.domain.use_cases.get_films.GetFilmsUseCase
 import com.github.sergey_kornyushin.domain.use_cases.get_selected_film.GetSelectedFilmUseCase
 import com.github.sergey_kornyushin.domain.use_cases.sort_films.SortFilmsByGenreUseCase
+import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
+import com.github.sergey_kornyushin.presentation.films_list.recycler_view.SelectedPositionSaver
 import com.github.sergey_kornyushin.presentation.mappers.PresenterMapper
 import dagger.Module
 import dagger.Provides
@@ -36,4 +38,8 @@ object PresentationModule {
     @Provides
     fun provideGetFilmsUseCase(filmsRepository: FilmsRepository): GetFilmsUseCase =
         GetFilmsUseCase.Base(filmsRepository)
+
+    @Singleton
+    @Provides
+    fun provideSelectedPositionSaver(): SelectedPositionSaver = SelectedPositionSaver(-1)
 }
