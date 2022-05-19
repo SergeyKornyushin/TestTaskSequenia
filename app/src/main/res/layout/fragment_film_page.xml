@@ -35,10 +35,11 @@
                     android:visibility="invisible" />
 
                 <ProgressBar
-                    android:id="@+id/pb_image_downloading"
+                    android:id="@+id/pb_image_download"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/img_film_poster"
@@ -93,6 +94,13 @@
             app:layout_constraintStart_toStartOf="@+id/frame_layout"
             app:layout_constraintTop_toBottomOf="@+id/frame_layout"
             tools:text="Description" />
+
+        <ProgressBar
+            android:id="@+id/pb_data_download"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
 
     </LinearLayout>
 </ScrollView>

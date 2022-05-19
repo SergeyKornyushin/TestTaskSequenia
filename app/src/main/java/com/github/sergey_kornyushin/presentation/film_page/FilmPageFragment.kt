@@ -44,7 +44,7 @@ class FilmPageFragment : MvpAppCompatFragment(), FilmPageView {
     }
 
     override fun showLoading(isLoading: Boolean) {
-        binding.pbImageDownloading.isVisible = isLoading
+        binding.pbDataDownload.isVisible = isLoading
     }
 
     override fun showError(message: String) {
@@ -53,7 +53,7 @@ class FilmPageFragment : MvpAppCompatFragment(), FilmPageView {
 
     override fun showFilm(film: Film) {
         binding.apply {
-            pbImageDownloading.isVisible = true
+            pbImageDownload.isVisible = true
             tvFilmTitle.text = film.name
             tvFilmYear.text = context?.getString(R.string.film_page_year, film.year)
             tvFilmRating.text = context?.getString(R.string.film_page_rating, film.rating)
@@ -62,17 +62,17 @@ class FilmPageFragment : MvpAppCompatFragment(), FilmPageView {
                 Picasso.get().load(film.image_url).into(imgFilmPoster, object : Callback {
                     override fun onSuccess() {
                         tvImageNotFount.isVisible = false
-                        pbImageDownloading.isVisible = false
+                        pbImageDownload.isVisible = false
                     }
 
                     override fun onError(e: Exception?) {
                         tvImageNotFount.isVisible = true
-                        pbImageDownloading.isVisible = false
+                        pbImageDownload.isVisible = false
                     }
                 })
             } else {
                 tvImageNotFount.isVisible = true
-                pbImageDownloading.isVisible = false
+                pbImageDownload.isVisible = false
             }
         }
     }

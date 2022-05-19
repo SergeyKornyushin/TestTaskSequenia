@@ -6,6 +6,7 @@ import com.github.sergey_kornyushin.common.ResourceProvider
 import com.github.sergey_kornyushin.domain.model.Film
 import com.github.sergey_kornyushin.domain.use_cases.UseCaseExecutor
 import com.github.sergey_kornyushin.domain.use_cases.get_selected_film.GetSelectedFilmUseCase
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -18,9 +19,14 @@ interface FilmPagePresenter {
 
     class Base @Inject constructor(
         private val getSelectedFilmUseCase: GetSelectedFilmUseCase,
-        private val resourceProvider: ResourceProvider
+        private val resourceProvider: ResourceProvider,
+        private var coroutineScope: CoroutineScope
     ) :
         MvpPresenter<FilmPageView>(), FilmPagePresenter, UseCaseExecutor<Flow<Resource<Film>>> {
+
+        init {
+            coroutineScope = presenterScope
+        }
 
         override fun getFilm(filmId: Int) {
             executeUseCase(getSelectedFilmUseCase.getSelectedFilmById(Film(filmId = filmId)))
@@ -48,7 +54,7 @@ interface FilmPagePresenter {
                         viewState.showLoading(true)
                     }
                 }
-            }.launchIn(scope = presenterScope)
+            }.launchIn(scope = coroutineScope)
         }
     }
 }

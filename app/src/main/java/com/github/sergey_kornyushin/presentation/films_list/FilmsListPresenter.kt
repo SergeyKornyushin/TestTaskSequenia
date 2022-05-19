@@ -8,12 +8,12 @@ import com.github.sergey_kornyushin.domain.use_cases.get_films.GetFilmsUseCase
 import com.github.sergey_kornyushin.domain.use_cases.sort_films.SortFilmsByGenreUseCase
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
 import com.github.sergey_kornyushin.presentation.mappers.PresenterMapper
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import moxy.MvpPresenter
 import moxy.presenterScope
-import java.text.FieldPosition
 import javax.inject.Inject
 
 interface FilmsListPresenter {
@@ -24,9 +24,14 @@ interface FilmsListPresenter {
         private val getFilmsUseCase: GetFilmsUseCase,
         private val getSortUseCase: SortFilmsByGenreUseCase,
         private val presenterMapper: PresenterMapper,
-        private val resourceProvider: ResourceProvider
+        private val resourceProvider: ResourceProvider,
+        private var coroutineScope: CoroutineScope
     ) : MvpPresenter<FilmsListView>(), UseCaseExecutor<Flow<Resource<List<RVFilmItem>>>>,
         FilmsListPresenter {
+
+        init {
+            coroutineScope = presenterScope
+        }
 
         override fun executeUseCase(useCaseResult: Flow<Resource<List<RVFilmItem>>>) {
             useCaseResult.onEach { result ->
@@ -47,7 +52,7 @@ interface FilmsListPresenter {
                         viewState.showLoading(true)
                     }
                 }
-            }.launchIn(scope = presenterScope)
+            }.launchIn(scope = coroutineScope)
         }
 
         init {
