@@ -19,8 +19,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:visibility="invisible"
             android:text="@string/image_not_found"
             android:textSize="18sp" />
+
+        <ProgressBar
+            android:id="@+id/pb_image_downloading"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <ImageView
             android:id="@+id/img_film_poster"

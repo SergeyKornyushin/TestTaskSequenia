@@ -1,7 +1,6 @@
 package com.github.sergey_kornyushin.presentation.films_list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.sergey_kornyushin.databinding.FragmentFilmsListBinding
-import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVClickListener
+import com.github.sergey_kornyushin.presentation.films_list.recycler_view.interfaces.RVClickListener
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmsAdapter
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmsSpanSize

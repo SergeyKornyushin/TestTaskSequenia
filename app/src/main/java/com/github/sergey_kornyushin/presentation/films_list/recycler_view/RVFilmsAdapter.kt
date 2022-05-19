@@ -1,6 +1,5 @@
 package com.github.sergey_kornyushin.presentation.films_list.recycler_view
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -9,6 +8,8 @@ import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.databinding.RvItemFilmBinding
 import com.github.sergey_kornyushin.databinding.RvItemGenreBinding
 import com.github.sergey_kornyushin.databinding.RvItemTitleBinding
+import com.github.sergey_kornyushin.presentation.films_list.recycler_view.interfaces.RVClickListener
+import com.github.sergey_kornyushin.presentation.films_list.recycler_view.interfaces.RVGenreClick
 import javax.inject.Inject
 
 class RVFilmsAdapter @Inject constructor(private var selectedItemPosition: SelectedPositionSaver) :
@@ -26,10 +27,6 @@ class RVFilmsAdapter @Inject constructor(private var selectedItemPosition: Selec
 
     fun setClickListener(clickListener: RVClickListener){
         this.clickListener = clickListener
-    }
-
-    init {
-        Log.i("test4", "init: $selectedItemPosition ${selectedItemPosition.hashCode()}")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVFilmHolder {

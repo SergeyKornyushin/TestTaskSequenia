@@ -1,6 +1,5 @@
 package com.github.sergey_kornyushin.presentation.films_list.recycler_view
 
-import android.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -8,6 +7,8 @@ import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.databinding.RvItemFilmBinding
 import com.github.sergey_kornyushin.databinding.RvItemGenreBinding
 import com.github.sergey_kornyushin.databinding.RvItemTitleBinding
+import com.github.sergey_kornyushin.presentation.films_list.recycler_view.interfaces.RVClickListener
+import com.github.sergey_kornyushin.presentation.films_list.recycler_view.interfaces.RVGenreClick
 import com.squareup.picasso.Picasso
 
 sealed class RVFilmHolder(binding: ViewBinding) : RecyclerView.ViewHolder(binding.root) {
