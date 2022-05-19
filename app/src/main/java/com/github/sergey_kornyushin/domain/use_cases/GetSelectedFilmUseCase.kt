@@ -1,4 +1,4 @@
-package com.github.sergey_kornyushin.domain.use_cases.get_selected_film
+package com.github.sergey_kornyushin.domain.use_cases
 
 import com.github.sergey_kornyushin.common.Resource
 import com.github.sergey_kornyushin.domain.model.Film

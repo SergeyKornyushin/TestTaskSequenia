@@ -3,10 +3,10 @@ package com.github.sergey_kornyushin.presentation.di
 import com.github.sergey_kornyushin.domain.repository.FilmsRepository
 import com.github.sergey_kornyushin.domain.repository.SelectedFilmRepository
 import com.github.sergey_kornyushin.domain.repository.SortRepository
-import com.github.sergey_kornyushin.domain.use_cases.get_films.GetFilmsUseCase
-import com.github.sergey_kornyushin.domain.use_cases.get_selected_film.GetSelectedFilmUseCase
-import com.github.sergey_kornyushin.domain.use_cases.sort_films.SortFilmsByGenreUseCase
-import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
+import com.github.sergey_kornyushin.domain.use_cases.GetFilmsUseCase
+import com.github.sergey_kornyushin.domain.use_cases.GetSelectedFilmUseCase
+import com.github.sergey_kornyushin.domain.use_cases.SortFilmsByGenreUseCase
+import com.github.sergey_kornyushin.presentation.films_list.CacheGenreItem
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.SelectedPositionSaver
 import com.github.sergey_kornyushin.presentation.mappers.PresenterMapper
 import dagger.Module
@@ -50,4 +50,8 @@ object PresentationModule {
     @Provides
     fun provideCoroutineScope(): CoroutineScope =
         CoroutineScope(SupervisorJob() + Dispatchers.Main)
+
+    @Singleton
+    @Provides
+    fun provideCacheGenreItem(): CacheGenreItem = CacheGenreItem()
 }

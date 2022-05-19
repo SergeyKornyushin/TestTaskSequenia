@@ -40,12 +40,10 @@ sealed class RVFilmHolder(binding: ViewBinding) : RecyclerView.ViewHolder(bindin
                 }
                 tvRvTitle.text = genre.name
                 root.setOnClickListener {
-                    clickListener.genreClick(genre, position)
+                    clickListener.genreClick(genre)
                     adapterClick.setSingleSelection(adapterPosition)
                 }
-
             }
-
         }
     }
 

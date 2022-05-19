@@ -4,8 +4,8 @@ import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.common.Resource
 import com.github.sergey_kornyushin.common.ResourceProvider
 import com.github.sergey_kornyushin.domain.use_cases.UseCaseExecutor
-import com.github.sergey_kornyushin.domain.use_cases.get_films.GetFilmsUseCase
-import com.github.sergey_kornyushin.domain.use_cases.sort_films.SortFilmsByGenreUseCase
+import com.github.sergey_kornyushin.domain.use_cases.GetFilmsUseCase
+import com.github.sergey_kornyushin.domain.use_cases.SortFilmsByGenreUseCase
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
 import com.github.sergey_kornyushin.presentation.mappers.PresenterMapper
 import kotlinx.coroutines.CoroutineScope
@@ -18,19 +18,21 @@ import javax.inject.Inject
 
 interface FilmsListPresenter {
     fun getFilmsList()
-    fun sortFilmsByGenre(genre: RVFilmItem.Genre, position: Int)
+    fun sortFilmsByGenre(genre: RVFilmItem.Genre)
 
     class Base @Inject constructor(
         private val getFilmsUseCase: GetFilmsUseCase,
         private val getSortUseCase: SortFilmsByGenreUseCase,
         private val presenterMapper: PresenterMapper,
         private val resourceProvider: ResourceProvider,
-        private var coroutineScope: CoroutineScope
+        private var coroutineScope: CoroutineScope,
+        private val cacheGenreItem: CacheGenreItem
     ) : MvpPresenter<FilmsListView>(), UseCaseExecutor<Flow<Resource<List<RVFilmItem>>>>,
         FilmsListPresenter {
 
         init {
             coroutineScope = presenterScope
+            getFilmsList()
         }
 
         override fun executeUseCase(useCaseResult: Flow<Resource<List<RVFilmItem>>>) {
@@ -55,16 +57,18 @@ interface FilmsListPresenter {
             }.launchIn(scope = coroutineScope)
         }
 
-        init {
-            getFilmsList()
-        }
-
         override fun getFilmsList() {
             executeUseCase(getFilmsUseCase.getFilms())
         }
 
-        override fun sortFilmsByGenre(genre: RVFilmItem.Genre, position: Int) {
-            executeUseCase(getSortUseCase.getFilmsByGenre(presenterMapper.mapGenreToDomain(genre)))
+        override fun sortFilmsByGenre(genre: RVFilmItem.Genre) {
+            if (cacheGenreItem.genreName == genre.name){
+                executeUseCase(getFilmsUseCase.getFilms())
+                cacheGenreItem.genreName = ""
+            } else {
+                executeUseCase(getSortUseCase.getFilmsByGenre(presenterMapper.mapGenreToDomain(genre)))
+                cacheGenreItem.genreName = genre.name
+            }
         }
     }
 }

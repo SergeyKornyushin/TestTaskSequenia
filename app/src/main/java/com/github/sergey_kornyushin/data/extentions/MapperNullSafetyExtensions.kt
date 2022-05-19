@@ -1,4 +1,4 @@
-package com.github.sergey_kornyushin.common
+package com.github.sergey_kornyushin.data.extentions
 
 fun Int?.avoidNullToString(string: String): String {
     return this?.toString() ?: string

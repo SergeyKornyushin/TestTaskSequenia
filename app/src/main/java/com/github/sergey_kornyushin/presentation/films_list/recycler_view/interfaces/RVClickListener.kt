@@ -3,6 +3,6 @@ package com.github.sergey_kornyushin.presentation.films_list.recycler_view.inter
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
 
 interface RVClickListener {
-    fun genreClick(genre: RVFilmItem.Genre, position: Int)
+    fun genreClick(genre: RVFilmItem.Genre)
     fun filmClick(filmId: Int, filmName: String)
 }

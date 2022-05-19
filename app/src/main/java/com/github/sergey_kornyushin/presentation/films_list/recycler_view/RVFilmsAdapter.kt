@@ -25,7 +25,7 @@ class RVFilmsAdapter @Inject constructor(private var selectedItemPosition: Selec
             differ.submitList(value)
         }
 
-    fun setClickListener(clickListener: RVClickListener){
+    fun setClickListener(clickListener: RVClickListener) {
         this.clickListener = clickListener
     }
 
@@ -82,9 +82,17 @@ class RVFilmsAdapter @Inject constructor(private var selectedItemPosition: Selec
 
     override fun setSingleSelection(adapterPosition: Int) {
         if (adapterPosition == RecyclerView.NO_POSITION) return
-
         notifyItemChanged(selectedItemPosition.position)
-        selectedItemPosition.position = adapterPosition
-        notifyItemChanged(adapterPosition)
+
+        if (selectedItemPosition.position == adapterPosition) {
+            selectedItemPosition.position = DEFAULT_POSITION
+        } else {
+            selectedItemPosition.position = adapterPosition
+            notifyItemChanged(adapterPosition)
+        }
+    }
+
+    companion object{
+        private const val DEFAULT_POSITION = -1
     }
 }

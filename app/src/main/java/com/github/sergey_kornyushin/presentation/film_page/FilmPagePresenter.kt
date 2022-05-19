@@ -5,7 +5,7 @@ import com.github.sergey_kornyushin.common.Resource
 import com.github.sergey_kornyushin.common.ResourceProvider
 import com.github.sergey_kornyushin.domain.model.Film
 import com.github.sergey_kornyushin.domain.use_cases.UseCaseExecutor
-import com.github.sergey_kornyushin.domain.use_cases.get_selected_film.GetSelectedFilmUseCase
+import com.github.sergey_kornyushin.domain.use_cases.GetSelectedFilmUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn

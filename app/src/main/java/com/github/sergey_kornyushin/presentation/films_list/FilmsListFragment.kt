@@ -66,8 +66,8 @@ class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener
         rvFilmsAdapter.list = filmsList
     }
 
-    override fun genreClick(genre: RVFilmItem.Genre, position: Int) {
-        presenter.sortFilmsByGenre(genre, position)
+    override fun genreClick(genre: RVFilmItem.Genre) {
+        presenter.sortFilmsByGenre(genre)
     }
 
     override fun filmClick(filmId: Int, filmName: String) {
