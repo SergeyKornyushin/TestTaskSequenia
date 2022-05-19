@@ -8,10 +8,12 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.sergey_kornyushin.databinding.FragmentFilmsListBinding
+import com.github.sergey_kornyushin.presentation.extentions.snackbar
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.interfaces.RVClickListener
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmsAdapter
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmsSpanSize
+import com.github.sergey_kornyushin.presentation.ui.ViewBindingHolder
 import dagger.hilt.android.AndroidEntryPoint
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -20,23 +22,23 @@ import javax.inject.Provider
 
 @AndroidEntryPoint
 class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener {
-    private lateinit var binding: FragmentFilmsListBinding
 
     @Inject
     lateinit var rvFilmsAdapter: RVFilmsAdapter
 
     @Inject
     lateinit var presenterProvider: Provider<FilmsListPresenter.Base>
-
     private val presenter by moxyPresenter { presenterProvider.get() }
+
+    private val bindingHolder = ViewBindingHolder<FragmentFilmsListBinding>()
+    private val binding get() = bindingHolder.binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentFilmsListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    ): View = bindingHolder.createView(
+        viewLifecycleOwner
+    ) { FragmentFilmsListBinding.inflate(inflater, container, false) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,7 +55,7 @@ class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener
     }
 
     override fun showError(message: String) {
-
+        binding.root.snackbar(message)
     }
 
     override fun showLoading(isLoading: Boolean) {
