@@ -10,7 +10,11 @@ data class FilmEntity(
     val image_url: String,
     val localized_name: String,
     val name: String,
-    val year: Int,
+    val year: String,
     val rating: String,
     val description: String
-)
+){
+    companion object{
+        const val FILM_ID = "filmId"
+    }
+}

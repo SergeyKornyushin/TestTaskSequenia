@@ -2,6 +2,7 @@ package com.github.sergey_kornyushin.data.di
 
 import android.content.Context
 import androidx.room.Room
+import com.github.sergey_kornyushin.common.ResourceProvider
 import com.github.sergey_kornyushin.data.database.FilmsDataBase
 import com.github.sergey_kornyushin.data.database.dao.FilmsDao
 import dagger.Module
@@ -28,4 +29,9 @@ object StorageModule {
     @Provides
     fun provideFilmsDao(filmsDataBase: FilmsDataBase): FilmsDao =
         filmsDataBase.filmsDao()
+
+    @Singleton
+    @Provides
+    fun provideResourceProvider(@ApplicationContext context: Context): ResourceProvider =
+        ResourceProvider.Base(context)
 }

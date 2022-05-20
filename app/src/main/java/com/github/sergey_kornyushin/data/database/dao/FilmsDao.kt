@@ -32,6 +32,26 @@ interface FilmsDao {
     suspend fun getAllGenres(): List<GenreEntity>
 
     @Transaction
-    @Query("SELECT * FROM FilmEntity")
+    @Query("SELECT * FROM FilmEntity ORDER BY localized_name")
     suspend fun getAllFilms(): List<FilmEntity>
+
+    @Transaction
+    @Query("SELECT * FROM FilmEntity WHERE filmId =:filmId")
+    suspend fun getFilmById(filmId: Int): FilmEntity
+
+    @Query("DELETE FROM FilmEntity")
+    suspend fun clearFilmsTable()
+
+    @Query("DELETE FROM GenreEntity")
+    suspend fun clearGenresTable()
+
+    @Query("DELETE FROM FilmsGenresCrossRef")
+    suspend fun clearFilmsGenresCrossRefTable()
+
+    @Transaction
+    suspend fun clearAllTables(){
+        clearFilmsTable()
+        clearGenresTable()
+        clearFilmsGenresCrossRefTable()
+    }
 }

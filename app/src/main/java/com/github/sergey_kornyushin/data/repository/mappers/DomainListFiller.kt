@@ -1,23 +1,34 @@
 package com.github.sergey_kornyushin.data.repository.mappers
 
+import com.github.sergey_kornyushin.R
+import com.github.sergey_kornyushin.common.ResourceProvider
 import com.github.sergey_kornyushin.data.database.model.FilmEntity
 import com.github.sergey_kornyushin.data.database.model.GenreEntity
-import com.github.sergey_kornyushin.presentation.main_list.recycler_view.RecyclerViewItem
+import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
 import javax.inject.Inject
 
 interface DomainListFiller {
-    suspend fun createListForRecyclerView(genres: List<GenreEntity>, films: List<FilmEntity>): List<RecyclerViewItem>
+    suspend fun createListForRecyclerView(
+        genres: List<GenreEntity>,
+        films: List<FilmEntity>
+    ): List<RVFilmItem>
 
-    class Base @Inject constructor(private val domainRVMapper: DomainRecyclerViewMapper.Base) :
+    class Base @Inject constructor(
+        private val domainRVMapper: DomainRecyclerViewMapper.Base,
+        private val resourceProvider: ResourceProvider
+    ) :
         DomainListFiller {
 
-        private val titles: List<RecyclerViewItem.Title> = listOf(
-            RecyclerViewItem.Title(1, "Жанры"),
-            RecyclerViewItem.Title(2, ("Фильмы"))
+        private val titles: List<RVFilmItem.Title> = listOf(
+            RVFilmItem.Title(1, resourceProvider.getString(R.string.genres)),
+            RVFilmItem.Title(2, (resourceProvider.getString(R.string.rv_title_films)))
         )
 
-        override suspend fun createListForRecyclerView(genres: List<GenreEntity>, films: List<FilmEntity>): List<RecyclerViewItem> {
-            val rvList: MutableList<RecyclerViewItem> = mutableListOf()
+        override suspend fun createListForRecyclerView(
+            genres: List<GenreEntity>,
+            films: List<FilmEntity>
+        ): List<RVFilmItem> {
+            val rvList: MutableList<RVFilmItem> = mutableListOf()
             rvList.add(titles[0])
             rvList.addAll(domainRVMapper.mapGenresToDomain(genres))
             rvList.add(titles[1])
