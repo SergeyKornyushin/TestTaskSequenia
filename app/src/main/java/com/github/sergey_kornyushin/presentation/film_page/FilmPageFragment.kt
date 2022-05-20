@@ -1,41 +1,29 @@
 package com.github.sergey_kornyushin.presentation.film_page
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.databinding.FragmentFilmPageBinding
 import com.github.sergey_kornyushin.domain.model.Film
 import com.github.sergey_kornyushin.presentation.extentions.snackbar
-import com.github.sergey_kornyushin.presentation.ui.ViewBindingHolder
+import com.github.sergey_kornyushin.presentation.ui.BaseFragment
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
 @AndroidEntryPoint
-class FilmPageFragment : MvpAppCompatFragment(), FilmPageView {
+class FilmPageFragment : BaseFragment<FragmentFilmPageBinding>(FragmentFilmPageBinding::inflate),
+    FilmPageView {
     private val args: FilmPageFragmentArgs by navArgs()
 
     @Inject
     lateinit var presenterProvider: Provider<FilmPagePresenter.Base>
     private val presenter by moxyPresenter { presenterProvider.get() }
-
-    private val bindingHolder = ViewBindingHolder<FragmentFilmPageBinding>()
-    private val binding get() = bindingHolder.binding
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = bindingHolder.createView(
-        viewLifecycleOwner
-    ) { FragmentFilmPageBinding.inflate(inflater, container, false) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
