@@ -14,7 +14,7 @@ interface DomainSingleFilmMapper {
                 image_url = filmDb.image_url,
                 localized_name = filmDb.localized_name,
                 name = filmDb.name,
-                year = filmDb.year.toString(),
+                year = filmDb.year,
                 rating = filmDb.rating,
                 description = filmDb.description
             )

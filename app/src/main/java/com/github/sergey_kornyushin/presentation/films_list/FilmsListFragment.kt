@@ -1,9 +1,7 @@
 package com.github.sergey_kornyushin.presentation.films_list
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,15 +11,15 @@ import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilm
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmsAdapter
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmsSpanSize
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.interfaces.RVClickListener
-import com.github.sergey_kornyushin.presentation.ui.ViewBindingHolder
+import com.github.sergey_kornyushin.presentation.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
 @AndroidEntryPoint
-class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener {
+class FilmsListFragment : BaseFragment<FragmentFilmsListBinding>(FragmentFilmsListBinding::inflate),
+    FilmsListView, RVClickListener {
 
     @Inject
     lateinit var rvFilmsAdapter: RVFilmsAdapter
@@ -29,16 +27,6 @@ class FilmsListFragment : MvpAppCompatFragment(), FilmsListView, RVClickListener
     @Inject
     lateinit var presenterProvider: Provider<FilmsListPresenter.Base>
     private val presenter by moxyPresenter { presenterProvider.get() }
-
-    private val bindingHolder = ViewBindingHolder<FragmentFilmsListBinding>()
-    private val binding get() = bindingHolder.binding
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = bindingHolder.createView(
-        viewLifecycleOwner
-    ) { FragmentFilmsListBinding.inflate(inflater, container, false) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
