@@ -1,10 +1,7 @@
 package com.github.sergey_kornyushin.presentation.ui
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -25,15 +22,6 @@ class MainActivity : AppCompatActivity() {
         navController = navHost.navController
 
         NavigationUI.setupActionBarWithNavController(this, navController)
-
-//        supportActionBar?.setBackgroundDrawable(
-//            ColorDrawable(
-//                ContextCompat.getColor(
-//                    applicationContext,
-//                    R.color.my_dark_gray
-//                )
-//            )
-//        )
     }
 
     override fun onSupportNavigateUp() = navController.navigateUp() || super.onSupportNavigateUp()

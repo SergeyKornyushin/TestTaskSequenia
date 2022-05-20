@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.databinding.FragmentFilmPageBinding
-import com.github.sergey_kornyushin.databinding.FragmentFilmsListBinding
 import com.github.sergey_kornyushin.domain.model.Film
 import com.github.sergey_kornyushin.presentation.extentions.snackbar
 import com.github.sergey_kornyushin.presentation.ui.ViewBindingHolder

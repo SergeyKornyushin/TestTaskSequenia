@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="6dp"
-        android:textSize="17sp"
         android:textColor="@color/my_text"
+        android:textSize="17sp"
         android:textStyle="bold"
-        tools:text="Title"/>
+        tools:text="Title" />
 </FrameLayout>
