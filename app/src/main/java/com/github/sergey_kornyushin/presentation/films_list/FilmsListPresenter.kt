@@ -8,7 +8,7 @@ import com.github.sergey_kornyushin.domain.use_cases.GetFilmsUseCase
 import com.github.sergey_kornyushin.domain.use_cases.SortFilmsByGenreUseCase
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
 import com.github.sergey_kornyushin.presentation.mappers.PresenterMapper
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -46,7 +46,8 @@ interface FilmsListPresenter {
                     }
                     is Resource.Error -> {
                         viewState.showError(
-                            result.message ?: resourceProvider.getString(R.string.unexpected_error)
+                            result.message
+                                ?: resourceProvider.getString(R.string.unexpected_error)
                         )
                         viewState.showLoading(false)
                     }
@@ -62,13 +63,18 @@ interface FilmsListPresenter {
         }
 
         override fun sortFilmsByGenre(genre: RVFilmItem.Genre) {
-            if (cacheGenreItem.genreName == genre.name){
+            coroutineScope.coroutineContext.job.cancelChildren()
+            if (cacheGenreItem.genreName == genre.name) {
                 executeUseCase(getFilmsUseCase.getFilms())
-                cacheGenreItem.genreName = ""
+                cacheGenreItem.genreName = BLANK_GENRE
             } else {
                 executeUseCase(getSortUseCase.getFilmsByGenre(presenterMapper.mapGenreToDomain(genre)))
                 cacheGenreItem.genreName = genre.name
             }
         }
+    }
+
+    private companion object {
+        private const val BLANK_GENRE = ""
     }
 }

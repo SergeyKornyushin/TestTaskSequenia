@@ -82,6 +82,8 @@ class RVFilmsAdapter @Inject constructor(private var selectedItemPosition: Selec
 
     override fun setSingleSelection(adapterPosition: Int) {
         if (adapterPosition == RecyclerView.NO_POSITION) return
+
+
         notifyItemChanged(selectedItemPosition.position)
 
         if (selectedItemPosition.position == adapterPosition) {
