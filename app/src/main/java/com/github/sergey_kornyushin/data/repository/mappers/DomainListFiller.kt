@@ -16,8 +16,7 @@ interface DomainListFiller {
     class Base @Inject constructor(
         private val domainRVMapper: DomainRecyclerViewMapper.Base,
         private val resourceProvider: ResourceProvider
-    ) :
-        DomainListFiller {
+    ) : DomainListFiller {
 
         private val titles: List<RVFilmItem.Title> = listOf(
             RVFilmItem.Title(1, resourceProvider.getString(R.string.genres)),
