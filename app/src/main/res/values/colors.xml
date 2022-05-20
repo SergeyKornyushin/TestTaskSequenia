@@ -11,8 +11,8 @@
     <color name="my_dark_gray">#222222</color>
     <color name="my_gray">#323232</color>
     <color name="my_light_gray">#424242</color>
+    <color name="my_lightest_gray">#424242</color>
     <color name="my_blue_light">#85B1D6</color>
     <color name="my_text">#CDCDCD</color>
-
-
+    <color name="my_yellow">#FFE600</color>
 </resources>
