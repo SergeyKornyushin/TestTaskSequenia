@@ -2,16 +2,11 @@ package com.github.sergey_kornyushin.presentation.films_list
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SimpleItemAnimator
 import com.github.sergey_kornyushin.databinding.FragmentFilmsListBinding
 import com.github.sergey_kornyushin.presentation.extentions.snackbar
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem

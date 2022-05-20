@@ -3,7 +3,6 @@ package com.github.sergey_kornyushin.data.database.dao
 import androidx.room.*
 import com.github.sergey_kornyushin.data.database.model.FilmEntity
 import com.github.sergey_kornyushin.data.database.model.GenreEntity
-import com.github.sergey_kornyushin.data.database.relations.FilmWithGenres
 import com.github.sergey_kornyushin.data.database.relations.FilmsGenresCrossRef
 import com.github.sergey_kornyushin.data.database.relations.GenreWithFilms
 
@@ -18,10 +17,6 @@ interface FilmsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFilmsGenreCrossRef(crossRef: FilmsGenresCrossRef)
-
-    @Transaction
-    @Query("SELECT * FROM FilmEntity WHERE filmId =:film")
-    suspend fun getFilmWithGenres(film: String): FilmWithGenres
 
     @Transaction
     @Query("SELECT * FROM GenreEntity WHERE genreName =:genre")

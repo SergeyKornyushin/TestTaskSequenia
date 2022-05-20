@@ -34,7 +34,6 @@ object PresentationModule {
     fun provideGetSelectedFilmUseCase(selectedFilmRepository: SelectedFilmRepository): GetSelectedFilmUseCase =
         GetSelectedFilmUseCase.Base(selectedFilmRepository)
 
-
     @Provides
     fun provideGetFilmsUseCase(filmsRepository: FilmsRepository): GetFilmsUseCase =
         GetFilmsUseCase.Base(filmsRepository)
