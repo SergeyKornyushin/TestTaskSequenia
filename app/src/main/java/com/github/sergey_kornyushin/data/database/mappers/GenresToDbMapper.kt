@@ -8,7 +8,9 @@ class GenresToDbMapper @Inject constructor() : ResponseMapper<FilmsDto, List<Gen
     override fun map(films: FilmsDto): List<GenreEntity> {
         val hashSet = HashSet<String>()
         films.filmsDto.forEach { film ->
-            film.genres?.let { hashSet.addAll(it) }
+            film.genres?.forEach { genre ->
+                if (genre.isNotBlank()) hashSet.add(genre)
+            }
         }
         val genresList: MutableList<GenreEntity> = mutableListOf()
         hashSet.forEach { genre ->

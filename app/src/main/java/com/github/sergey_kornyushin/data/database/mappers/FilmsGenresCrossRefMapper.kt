@@ -10,12 +10,14 @@ class FilmsGenresCrossRefMapper @Inject constructor() :
         val listFilmsGenres: MutableList<FilmsGenresCrossRef> = mutableListOf()
         films.filmsDto.forEach { film ->
             film.genres?.forEach { genre ->
-                listFilmsGenres.add(
-                    FilmsGenresCrossRef(
-                        filmId = film.id ?: 0,
-                        genreName = genre
+                if (genre.isNotBlank()) {
+                    listFilmsGenres.add(
+                        FilmsGenresCrossRef(
+                            filmId = film.id ?: 0,
+                            genreName = genre
+                        )
                     )
-                )
+                }
             }
         }
         return listFilmsGenres
