@@ -34,11 +34,13 @@ sealed class RVFilmHolder(binding: ViewBinding) : RecyclerView.ViewHolder(bindin
         ) {
             with(binding) {
                 if (isSelected) {
-                    genreItem.background =
-                        ContextCompat.getDrawable(genreItem.context, R.drawable.light_background)
+                    itemView.setBackgroundColor(
+                        ContextCompat.getColor(genreItem.context, R.color.item_selected_color)
+                    )
                 } else {
-                    genreItem.background =
-                        ContextCompat.getDrawable(genreItem.context, R.drawable.dark_background)
+                    itemView.setBackgroundColor(
+                        ContextCompat.getColor(genreItem.context, R.color.background_color)
+                    )
                 }
                 tvRvTitle.text = genre.name
                 root.setOnClickListener {
