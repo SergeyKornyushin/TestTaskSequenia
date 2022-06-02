@@ -7,7 +7,7 @@ import org.junit.Before
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-class GenresToDbMapperTest {
+class RealmGenresToDbMapperTest {
 
     private val mapper = GenresToDbMapper()
 

@@ -1,5 +1,6 @@
 package com.github.sergey_kornyushin.data.database.realm
 
+import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
@@ -11,5 +12,6 @@ open class FilmDb(
     var name: String = "",
     var year: String = "",
     var rating: String = "",
-    var description: String = ""
+    var description: String = "",
+    var genres: RealmList<GenreDb> = RealmList()
 ) : RealmObject()

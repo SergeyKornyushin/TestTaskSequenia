@@ -9,7 +9,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.*
 
-class FilmsToDbMapperTest {
+class RealmFilmsToDbMapperTest {
 
     private val testResourceProvider = mock(ResourceProvider::class.java)
     private val mapper = FilmsToDbMapper(testResourceProvider)

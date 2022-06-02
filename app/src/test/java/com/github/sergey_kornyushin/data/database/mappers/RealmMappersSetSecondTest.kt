@@ -12,7 +12,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.*
 
-class MappersSetSecondTest {
+class RealmMappersSetSecondTest {
 
     private val fakeFilmsDao = mock(FilmsDao::class.java)
     private val filmsDto = FilmsDto(
