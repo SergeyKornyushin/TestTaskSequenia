@@ -1,16 +1,15 @@
 package com.github.sergey_kornyushin.data.database.realm
 
-
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
 open class FilmDb(
     @PrimaryKey
-    val filmId: Int,
-    val image_url: String,
-    val localized_name: String,
-    val name: String,
-    val year: String,
-    val rating: String,
-    val description: String
+    var filmId: Int = -1,
+    var image_url: String = "",
+    var localized_name: String = "",
+    var name: String = "",
+    var year: String = "",
+    var rating: String = "",
+    var description: String = ""
 ) : RealmObject()

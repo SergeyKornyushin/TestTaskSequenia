@@ -6,10 +6,21 @@ import javax.inject.Inject
 
 class RealmOperations @Inject constructor(private val config: RealmConfiguration) {
 
-
-    suspend fun insertFilm() {
+    suspend fun insertFilm(filmDb: FilmDb) {
         val realm = Realm.getInstance(config)
 
-
+        realm.executeTransaction { transaction ->
+            transaction.insert(filmDb)
+        }
     }
+
+    suspend fun insertGenre(genreDb: GenreDb) {
+        val realm = Realm.getInstance(config)
+
+        realm.executeTransaction { transaction ->
+            transaction.insert(genreDb)
+        }
+    }
+
+
 }
