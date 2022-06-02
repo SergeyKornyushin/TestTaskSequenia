@@ -60,11 +60,11 @@ object DomainModule {
 
     @Provides
     fun provideSelectedFilmRepository(
-        filmsDao: FilmsDao,
+        realmOperations: RealmOperations,
         domainSingleFilmMapper: DomainSingleFilmMapper.Base,
         resourceProvider: ResourceProvider
     ): SelectedFilmRepository {
-        return FilmPageRepositoryImpl.Base(filmsDao, domainSingleFilmMapper, resourceProvider)
+        return FilmPageRepositoryImpl.Base(realmOperations, domainSingleFilmMapper, resourceProvider)
     }
 
     @Provides

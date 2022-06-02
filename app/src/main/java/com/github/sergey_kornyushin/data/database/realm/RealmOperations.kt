@@ -1,5 +1,6 @@
 package com.github.sergey_kornyushin.data.database.realm
 
+import com.github.sergey_kornyushin.domain.model.Genre
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.Sort
@@ -64,7 +65,27 @@ class RealmOperations @Inject constructor(private val realmConfiguration: RealmC
         }
     }
 
-    suspend fun getGenreWithFilms(): List<FilmDb>{
-        return listOf()
+    suspend fun getGenreWithFilms(): List<FilmDb> {
+//        val realm = Realm.getInstance(realmConfiguration)
+//        val filmsList = mutableListOf<FilmDb>()
+//
+//        realm.executeTransactionAwait(Dispatchers.IO) { transaction ->
+//            transaction.where(GenreDb::class.java)
+//                .findAll()
+//                .sort()
+//        }
+        return emptyList()
     }
+
+    suspend fun getFilmById(filmId: Int): FilmDb? {
+        val realm = Realm.getInstance(realmConfiguration)
+        var film: FilmDb? = FilmDb()
+        realm.executeTransactionAwait(Dispatchers.IO) { transaction ->
+            film = transaction.where(FilmDb::class.java)
+                .equalTo("filmId", filmId)
+                .findFirst()
+        }
+        return film
+    }
+
 }
