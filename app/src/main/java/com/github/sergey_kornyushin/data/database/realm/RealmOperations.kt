@@ -3,25 +3,35 @@ package com.github.sergey_kornyushin.data.database.realm
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.Sort
+import io.realm.kotlin.executeTransactionAwait
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import okhttp3.Dispatcher
 import javax.inject.Inject
 
-class RealmOperations @Inject constructor(private val realm: Realm) {
+class RealmOperations @Inject constructor(private val realmConfiguration: RealmConfiguration) {
 
     suspend fun insertFilm(filmDb: FilmDb) {
-        realm.executeTransaction { transaction ->
+        val realm = Realm.getInstance(realmConfiguration)
+
+        realm.executeTransactionAwait(Dispatchers.IO) { transaction ->
             transaction.insert(filmDb)
         }
     }
 
     suspend fun insertGenre(genreDb: GenreDb) {
-        realm.executeTransaction { transaction ->
+        val realm = Realm.getInstance(realmConfiguration)
+
+        realm.executeTransactionAwait(Dispatchers.IO) { transaction ->
             transaction.insert(genreDb)
         }
     }
 
     suspend fun getAllGenres(): List<GenreDb> {
+        val realm = Realm.getInstance(realmConfiguration)
         val genresList = mutableListOf<GenreDb>()
-        realm.executeTransaction { transaction ->
+
+        realm.executeTransactionAwait(Dispatchers.IO) { transaction ->
             transaction.where(GenreDb::class.java)
                 .findAll()
                 .map { genre ->
@@ -32,8 +42,10 @@ class RealmOperations @Inject constructor(private val realm: Realm) {
     }
 
     suspend fun getAllFilms(): List<FilmDb> {
+        val realm = Realm.getInstance(realmConfiguration)
         val filmsList = mutableListOf<FilmDb>()
-        realm.executeTransaction { transaction ->
+
+        realm.executeTransactionAwait(Dispatchers.IO) { transaction ->
             transaction.where(FilmDb::class.java)
                 .findAll()
                 .sort("localized_name", Sort.ASCENDING)
@@ -45,8 +57,14 @@ class RealmOperations @Inject constructor(private val realm: Realm) {
     }
 
     suspend fun clearGenresAndFilms() {
-        realm.executeTransaction { transaction ->
+        val realm = Realm.getInstance(realmConfiguration)
+
+        realm.executeTransactionAwait(Dispatchers.IO) { transaction ->
             transaction.deleteAll()
         }
+    }
+
+    suspend fun getGenreWithFilms(): List<FilmDb>{
+        return listOf()
     }
 }

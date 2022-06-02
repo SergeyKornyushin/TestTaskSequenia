@@ -13,15 +13,9 @@ import javax.inject.Singleton
 object RealmModule {
     private const val realmVersion = 1L
 
-    @Singleton
     @Provides
     fun providesRealmConfig(): RealmConfiguration =
         RealmConfiguration.Builder()
             .schemaVersion(realmVersion)
             .build()
-
-    @Singleton
-    @Provides
-    fun provideRealmInstance(config: RealmConfiguration) =
-        Realm.getInstance(config)
 }

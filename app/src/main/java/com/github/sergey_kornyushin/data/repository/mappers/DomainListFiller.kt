@@ -2,15 +2,15 @@ package com.github.sergey_kornyushin.data.repository.mappers
 
 import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.common.ResourceProvider
-import com.github.sergey_kornyushin.data.database.model.FilmEntity
-import com.github.sergey_kornyushin.data.database.model.GenreEntity
+import com.github.sergey_kornyushin.data.database.realm.FilmDb
+import com.github.sergey_kornyushin.data.database.realm.GenreDb
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
 import javax.inject.Inject
 
 interface DomainListFiller {
     suspend fun createListForRecyclerView(
-        genres: List<GenreEntity>,
-        films: List<FilmEntity>
+        genres: List<GenreDb>,
+        films: List<FilmDb>
     ): List<RVFilmItem>
 
     class Base @Inject constructor(
@@ -24,8 +24,8 @@ interface DomainListFiller {
         )
 
         override suspend fun createListForRecyclerView(
-            genres: List<GenreEntity>,
-            films: List<FilmEntity>
+            genres: List<GenreDb>,
+            films: List<FilmDb>
         ): List<RVFilmItem> {
             val rvList: MutableList<RVFilmItem> = mutableListOf()
             rvList.add(titles[0])

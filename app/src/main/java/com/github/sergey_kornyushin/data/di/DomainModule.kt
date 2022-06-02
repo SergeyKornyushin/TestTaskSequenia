@@ -2,10 +2,10 @@ package com.github.sergey_kornyushin.data.di
 
 import com.github.sergey_kornyushin.common.ResourceProvider
 import com.github.sergey_kornyushin.data.database.dao.FilmsDao
-import com.github.sergey_kornyushin.data.database.mappers.FilmsGenresCrossRefMapper
-import com.github.sergey_kornyushin.data.database.mappers.FilmsToDbMapper
-import com.github.sergey_kornyushin.data.database.mappers.GenresToDbMapper
-import com.github.sergey_kornyushin.data.database.mappers.MappersSet
+import com.github.sergey_kornyushin.data.database.realm.RealmOperations
+import com.github.sergey_kornyushin.data.database.realm.mappers.RealmFilmsToDbMapper
+import com.github.sergey_kornyushin.data.database.realm.mappers.RealmGenresToDbMapper
+import com.github.sergey_kornyushin.data.database.realm.mappers.RealmMappersSet
 import com.github.sergey_kornyushin.data.remote.FilmsApi
 import com.github.sergey_kornyushin.data.repository.FilmPageRepositoryImpl
 import com.github.sergey_kornyushin.data.repository.FilmsRepositoryImpl
@@ -26,16 +26,16 @@ object DomainModule {
 
     @Provides
     fun provideFilmsRepository(
-        filmsDao: FilmsDao,
+        realmOperations: RealmOperations,
         filmsApi: FilmsApi,
-        mappersSet: MappersSet.Base,
+        RealmMappersSet: RealmMappersSet.Base,
         listFiller: DomainListFiller,
         resourceProvider: ResourceProvider
     ): FilmsRepository {
         return FilmsRepositoryImpl.Base(
-            filmsDao,
+            realmOperations,
             filmsApi,
-            mappersSet,
+            RealmMappersSet,
             listFiller,
             resourceProvider
         )
@@ -43,16 +43,16 @@ object DomainModule {
 
     @Provides
     fun provideSortRepository(
-        filmsDao: FilmsDao,
+        realmOperations: RealmOperations,
         filmsApi: FilmsApi,
-        mappersSet: MappersSet.Base,
+        realmMappersSet: RealmMappersSet.Base,
         listFiller: DomainListFiller,
         resourceProvider: ResourceProvider
     ): SortRepository {
         return FilmsRepositoryImpl.Base(
-            filmsDao,
+            realmOperations,
             filmsApi,
-            mappersSet,
+            realmMappersSet,
             listFiller,
             resourceProvider
         )
@@ -68,11 +68,10 @@ object DomainModule {
     }
 
     @Provides
-    fun provideMappersSet(resourceProvider: ResourceProvider): MappersSet {
-        return MappersSet.Base(
-            FilmsToDbMapper(resourceProvider),
-            GenresToDbMapper(),
-            FilmsGenresCrossRefMapper()
+    fun provideRealmMappersSet(resourceProvider: ResourceProvider): RealmMappersSet {
+        return RealmMappersSet.Base(
+            RealmFilmsToDbMapper(resourceProvider),
+            RealmGenresToDbMapper()
         )
     }
 
