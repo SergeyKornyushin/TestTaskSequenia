@@ -6,7 +6,6 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs'
 }
-apply plugin: "realm-android"
 
 android {
     compileSdk 31

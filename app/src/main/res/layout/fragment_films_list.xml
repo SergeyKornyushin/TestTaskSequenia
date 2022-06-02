@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/darkBackgroundColor"
+    android:background="@drawable/some_id"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     tools:context=".presentation.films_list.FilmsListFragment">
 
@@ -12,7 +12,7 @@
         android:id="@+id/rv_films_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="6dp" />
+        android:padding="8dp" />
 
     <ProgressBar
         android:id="@+id/pb_download"
@@ -20,5 +20,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone" />
+        android:visibility="visible" />
 </FrameLayout>
