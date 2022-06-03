@@ -13,6 +13,7 @@
 - Room
 - Navigation Component
 - Coroutines + Flow
+- JUnit4+Mockito
 
 ТЗ  | Результат
 ------------- | -------------
