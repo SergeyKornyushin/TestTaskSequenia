@@ -1,7 +1,11 @@
 package com.github.sergey_kornyushin.presentation.films_list.recycler_view
 
+import android.util.Log
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.view.marginLeft
+import androidx.core.view.marginRight
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.github.sergey_kornyushin.R
@@ -34,11 +38,13 @@ sealed class RVFilmHolder(binding: ViewBinding) : RecyclerView.ViewHolder(bindin
         ) {
             with(binding) {
                 if (isSelected) {
-                    genreItem.background =
-                        ContextCompat.getDrawable(genreItem.context, R.drawable.light_background)
+                    itemView.setBackgroundColor(
+                        ContextCompat.getColor(genreItem.context, R.color.item_selected_color)
+                    )
                 } else {
-                    genreItem.background =
-                        ContextCompat.getDrawable(genreItem.context, R.drawable.dark_background)
+                    itemView.setBackgroundColor(
+                        ContextCompat.getColor(genreItem.context, R.color.background_color)
+                    )
                 }
                 tvRvTitle.text = genre.name
                 root.setOnClickListener {
@@ -52,7 +58,11 @@ sealed class RVFilmHolder(binding: ViewBinding) : RecyclerView.ViewHolder(bindin
     data class FilmViewHolder(
         private val binding: RvItemFilmBinding
     ) : RVFilmHolder(binding) {
-        fun bind(filmItem: RVFilmItem.FilmItem, clickListener: RVClickListener) {
+        fun bind(
+            filmItem: RVFilmItem.FilmItem,
+            clickListener: RVClickListener,
+            startsFromEven: Boolean
+        ) {
             binding.apply {
                 root.setOnClickListener {
                     clickListener.filmClick(
@@ -76,6 +86,25 @@ sealed class RVFilmHolder(binding: ViewBinding) : RecyclerView.ViewHolder(bindin
                     binding.imgPoster.setImageResource(0)
                     tvNotFound.isVisible = true
                 }
+            }
+            val layoutParams = (itemView.layoutParams as ViewGroup.MarginLayoutParams)
+            if (startsFromEven) {
+                if (adapterPosition % 2 == 0) {
+                    layoutParams.setMargins(32, 16, 16, 0)
+                    itemView.layoutParams = layoutParams
+                } else {
+                    layoutParams.setMargins(16, 16, 32, 0)
+                    itemView.layoutParams = layoutParams
+                }
+            } else {
+                if (adapterPosition % 2 == 0) {
+                    layoutParams.setMargins(16, 16, 32, 0)
+                    itemView.layoutParams = layoutParams
+                } else {
+                    layoutParams.setMargins(32, 16, 16, 0)
+                    itemView.layoutParams = layoutParams
+                }
+
             }
         }
     }

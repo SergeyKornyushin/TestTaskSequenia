@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.TestTaskSequenia" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.TestTaskSequenia" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/my_dark_gray</item>
+        <item name="colorPrimary">@color/action_bar_color</item>
+        <item name="colorPrimaryVariant">@color/action_bar_color</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -13,13 +13,17 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="actionBarStyle">@style/Custom.DarkActionBar</item>
-        <item name="android:textColor">@color/my_text</item>
+        <item name="android:textColor">@color/text_color</item>
 
         <item name="darkBackgroundColor">@color/black</item>
     </style>
 
     <style name="Custom.DarkActionBar" parent="Widget.MaterialComponents.Light.ActionBar.Solid">
-        <item name="background">@color/my_dark_gray</item>
+        <item name="background">@color/action_bar_color</item>
+    </style>
+
+    <style name="Custom.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="background">@color/my_yellow</item>
     </style>
 
 </resources>

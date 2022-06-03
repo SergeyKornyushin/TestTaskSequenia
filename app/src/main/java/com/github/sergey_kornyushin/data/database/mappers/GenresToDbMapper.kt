@@ -2,7 +2,9 @@ package com.github.sergey_kornyushin.data.database.mappers
 
 import com.github.sergey_kornyushin.data.database.model.GenreEntity
 import com.github.sergey_kornyushin.data.remote.dto.FilmsDto
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.HashSet
 
 class GenresToDbMapper @Inject constructor() : ResponseMapper<FilmsDto, List<GenreEntity>> {
     override fun map(films: FilmsDto): List<GenreEntity> {
@@ -14,7 +16,7 @@ class GenresToDbMapper @Inject constructor() : ResponseMapper<FilmsDto, List<Gen
         }
         val genresList: MutableList<GenreEntity> = mutableListOf()
         hashSet.forEach { genre ->
-            genresList.add(GenreEntity(genre))
+            genresList.add(GenreEntity(genre.replaceFirstChar { it.uppercase() }))
         }
         return genresList
     }

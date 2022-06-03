@@ -15,4 +15,14 @@
     <color name="my_blue_light">#85B1D6</color>
     <color name="my_text">#CDCDCD</color>
     <color name="my_yellow">#FFE600</color>
+
+
+    <color name="background_color">#FFFFFF</color>
+    <color name="text_color">#FFFFFF</color>
+    <color name="item_selected_color">#D7F6F8</color>
+    <color name="main_text_color">#000000</color>
+    <color name="second_text_color">#4B4B4B</color>
+    <color name="light_text_color">#6936D6</color>
+    <color name="action_bar_color">#6936D6</color>
+    <color name="gray_color">#EFEFEF</color>
 </resources>

@@ -2,8 +2,8 @@ package com.github.sergey_kornyushin.data.database.mappers
 
 import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.common.ResourceProvider
-import com.github.sergey_kornyushin.data.extentions.avoidNullToString
 import com.github.sergey_kornyushin.data.database.model.FilmEntity
+import com.github.sergey_kornyushin.data.extentions.avoidNullToString
 import com.github.sergey_kornyushin.data.remote.dto.FilmsDto
 import javax.inject.Inject
 
