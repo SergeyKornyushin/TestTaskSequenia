@@ -14,7 +14,7 @@ class FilmsGenresCrossRefMapper @Inject constructor() :
                     listFilmsGenres.add(
                         FilmsGenresCrossRef(
                             filmId = film.id ?: 0,
-                            genreName = genre
+                            genreName = genre.replaceFirstChar { it.uppercase() }
                         )
                     )
                 }
