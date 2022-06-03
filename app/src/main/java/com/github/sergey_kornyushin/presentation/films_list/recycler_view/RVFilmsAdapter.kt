@@ -8,6 +8,7 @@ import com.github.sergey_kornyushin.R
 import com.github.sergey_kornyushin.databinding.RvItemFilmBinding
 import com.github.sergey_kornyushin.databinding.RvItemGenreBinding
 import com.github.sergey_kornyushin.databinding.RvItemTitleBinding
+import com.github.sergey_kornyushin.presentation.extentions.filmsStartsFromEven
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.interfaces.RVClickListener
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.interfaces.RVGenreClick
 import javax.inject.Inject
@@ -16,6 +17,7 @@ class RVFilmsAdapter @Inject constructor(private var selectedItemPosition: Selec
     RecyclerView.Adapter<RVFilmHolder>(), RVGenreClick {
 
     private lateinit var clickListener: RVClickListener
+    private var filmsStartsFromEven: Boolean = false
 
     private val differ = AsyncListDiffer(this, DiffCallback())
 
@@ -23,6 +25,7 @@ class RVFilmsAdapter @Inject constructor(private var selectedItemPosition: Selec
         get() = differ.currentList
         set(value) {
             differ.submitList(value)
+            filmsStartsFromEven = value.filmsStartsFromEven()
         }
 
     fun setClickListener(clickListener: RVClickListener) {
@@ -63,10 +66,13 @@ class RVFilmsAdapter @Inject constructor(private var selectedItemPosition: Selec
                     this
                 )
             }
-            is RVFilmHolder.FilmViewHolder -> holder.bind(
-                list[position] as RVFilmItem.FilmItem,
-                clickListener
-            )
+            is RVFilmHolder.FilmViewHolder -> {
+                holder.bind(
+                    list[position] as RVFilmItem.FilmItem,
+                    clickListener,
+                    filmsStartsFromEven
+                )
+            }
         }
     }
 
@@ -94,7 +100,7 @@ class RVFilmsAdapter @Inject constructor(private var selectedItemPosition: Selec
         }
     }
 
-    private companion object{
+    private companion object {
         private const val DEFAULT_POSITION = -1
     }
 }

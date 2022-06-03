@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.github.sergey_kornyushin.databinding.FragmentFilmsListBinding
 import com.github.sergey_kornyushin.presentation.extentions.snackbar
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItem
+import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmItemDecorator
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmsAdapter
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.RVFilmsSpanSize
 import com.github.sergey_kornyushin.presentation.films_list.recycler_view.interfaces.RVClickListener
@@ -39,6 +40,7 @@ class FilmsListFragment : BaseFragment<FragmentFilmsListBinding>(FragmentFilmsLi
             layoutManager = gridLayoutManager
             setHasFixedSize(true)
             adapter = rvFilmsAdapter
+//            addItemDecoration(RVFilmItemDecorator())
         }
     }
 
